@@ -1,10 +1,11 @@
-package io.github.thwisse.kentinsesi
+package io.github.thwisse.kentinsesi.ui
 
 import android.os.Bundle
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
+import io.github.thwisse.kentinsesi.R
 
 class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
