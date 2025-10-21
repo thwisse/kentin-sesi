@@ -7,39 +7,57 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
+import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
-import com.google.firebase.auth.FirebaseAuth
-import com.google.firebase.auth.ktx.auth
-import com.google.firebase.ktx.Firebase
+import androidx.fragment.app.viewModels
+import androidx.lifecycle.Lifecycle
+import androidx.lifecycle.lifecycleScope
+import androidx.lifecycle.repeatOnLifecycle
+import androidx.navigation.fragment.findNavController
+import dagger.hilt.android.AndroidEntryPoint
 import io.github.thwisse.kentinsesi.R
 import io.github.thwisse.kentinsesi.databinding.FragmentRegisterBinding
 import io.github.thwisse.kentinsesi.ui.AuthActivity
 import io.github.thwisse.kentinsesi.ui.MainActivity
-import androidx.navigation.fragment.findNavController
+import kotlinx.coroutines.launch
 
+@AndroidEntryPoint // Hilt için
 class RegisterFragment : Fragment() {
 
     private var _binding: FragmentRegisterBinding? = null
     private val binding get() = _binding!!
 
-    private lateinit var auth: FirebaseAuth
+    // ViewModel'i alıyoruz
+    private val viewModel: AuthViewModel by viewModels()
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
         _binding = FragmentRegisterBinding.inflate(inflater, container, false)
-
-        auth = Firebase.auth
-
         return binding.root
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+        setupClickListeners()
+        observeRegistrationState() // ViewModel'deki durumu dinle
+    }
+
+    private fun setupClickListeners() {
         binding.btnRegister.setOnClickListener {
-            registerUser()
+            val fullName = binding.etFullName.text.toString().trim()
+            val email = binding.etEmail.text.toString().trim()
+            val password = binding.etPassword.text.toString().trim()
+
+            if (fullName.isEmpty() || email.isEmpty() || password.isEmpty()) {
+                Toast.makeText(requireContext(), "Tüm alanlar doldurulmalıdır", Toast.LENGTH_SHORT)
+                    .show()
+                return@setOnClickListener
+            }
+            // Sadece ViewModel'i çağır
+            viewModel.registerUser(fullName, email, password)
         }
 
         binding.tvGoToLogin.setOnClickListener {
@@ -47,42 +65,47 @@ class RegisterFragment : Fragment() {
         }
     }
 
-    private fun registerUser() {
-        val fullName = binding.etFullName.text.toString().trim()
-        val email = binding.etEmail.text.toString().trim()
-        val password = binding.etPassword.text.toString().trim()
+    private fun observeRegistrationState() {
+        viewLifecycleOwner.lifecycleScope.launch {
+            viewLifecycleOwner.repeatOnLifecycle(Lifecycle.State.STARTED) {
+                viewModel.registrationState.observe(viewLifecycleOwner) { state ->
+                    // ProgressBar yönetimi
+                    binding.progressBar.isVisible = state is AuthState.Loading
+                    binding.btnRegister.isEnabled = state !is AuthState.Loading
+                    binding.tvGoToLogin.isEnabled = state !is AuthState.Loading
 
-        if (fullName.isEmpty() || email.isEmpty() || password.isEmpty()) {
-            Toast.makeText(requireContext(), "Tüm alanlar doldurulmalıdır", Toast.LENGTH_SHORT)
-                .show()
-            Log.d("RegisterFragment", "Tüm alanlar doldurulmalıdır")
-            return
-        }
+                    when (state) {
+                        is AuthState.Success -> {
+                            Toast.makeText(requireContext(), "Kayıt başarılı!", Toast.LENGTH_SHORT)
+                                .show()
+                            Log.d("RegisterFragment", "Kayıt başarılı!")
+                            navigateToMain()
+                        }
 
-        // TODO: Yükleniyor (Loading) göstergesi eklenebilir
+                        is AuthState.Error -> {
+                            Toast.makeText(
+                                requireContext(),
+                                "Kayıt başarısız: ${state.message}",
+                                Toast.LENGTH_LONG
+                            ).show()
+                            Log.e("RegisterFragment", "Kayıt başarısız: ${state.message}")
+                        }
 
-        auth.createUserWithEmailAndPassword(email, password)
-            .addOnCompleteListener(requireActivity()) { task ->
-                if (task.isSuccessful) {
-                    Toast.makeText(requireContext(), "Kayıt başarılı!", Toast.LENGTH_SHORT).show()
-                    Log.d("RegisterFragment", "Kayıt başarılı!")
-
-                    (activity as? AuthActivity)?.let {
-                        val intent = Intent(it, MainActivity::class.java)
-                        it.startActivity(intent)
-                        it.finish()
+                        AuthState.Idle -> {}
+                        AuthState.Loading -> {}
                     }
-
-                } else {
-                    Toast.makeText(
-                        requireContext(),
-                        "Kayıt başarısız: ${task.exception?.message}",
-                        Toast.LENGTH_LONG
-                    ).show()
-                    Log.e("RegisterFragment", "Kayıt başarısız: ${task.exception?.message}")
                 }
-                // TODO: Yükleniyor göstergesini gizle
             }
+        }
+    }
+
+    private fun navigateToMain() {
+        (activity as? AuthActivity)?.let {
+            val intent = Intent(it, MainActivity::class.java)
+            intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
+            it.startActivity(intent)
+            it.finish()
+        }
     }
 
     override fun onDestroyView() {
