@@ -3,4 +3,8 @@
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="yeni_bildirim_olustur">Yeni Bildirim Oluştur</string>
+    <string name="e_posta">E-posta</string>
+    <string name="sifre">Şifre</string>
+    <string name="giris_yap">Giriş Yap</string>
+    <string name="hesabin_yok_mu_kayit_ol">Hesabın yok mu? Kayıt Ol</string>
 </resources>
