@@ -39,7 +39,6 @@ class LoginFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
 
         binding.btnLogin.setOnClickListener {
-            // Giriş yapma fonksiyonunu çağır
             loginUser()
         }
 
@@ -48,36 +47,36 @@ class LoginFragment : Fragment() {
         }
     }
 
-    // Yeni giriş fonksiyonunu ekle
     private fun loginUser() {
         val email = binding.etEmail.text.toString().trim()
         val password = binding.etPassword.text.toString().trim()
 
         if (email.isEmpty() || password.isEmpty()) {
-            Toast.makeText(requireContext(), "E-posta ve şifre girilmelidir", Toast.LENGTH_SHORT).show()
+            Toast.makeText(requireContext(), "E-posta ve şifre girilmelidir", Toast.LENGTH_SHORT)
+                .show()
             Log.d("LoginFragment", "E-posta ve şifre girilmelidir")
             return
         }
 
         // TODO: Yükleniyor (Loading) göstergesi eklenebilir
 
-        // Firebase'e "Giriş yap" komutunu gönder
         auth.signInWithEmailAndPassword(email, password)
             .addOnCompleteListener(requireActivity()) { task ->
                 if (task.isSuccessful) {
-                    // Giriş başarılı!
                     Toast.makeText(requireContext(), "Giriş başarılı!", Toast.LENGTH_SHORT).show()
                     Log.d("LoginFragment", "Giriş başarılı!")
 
-                    // Kullanıcıyı MainActivity'ye yönlendir
                     (activity as? AuthActivity)?.let {
                         val intent = Intent(it, MainActivity::class.java)
                         it.startActivity(intent)
-                        it.finish() // AuthActivity'yi kapat
+                        it.finish()
                     }
                 } else {
-                    // Giriş başarısız (Şifre yanlış, kullanıcı bulunamadı vb.)
-                    Toast.makeText(requireContext(), "Giriş başarısız: ${task.exception?.message}", Toast.LENGTH_LONG).show()
+                    Toast.makeText(
+                        requireContext(),
+                        "Giriş başarısız: ${task.exception?.message}",
+                        Toast.LENGTH_LONG
+                    ).show()
                     Log.e("LoginFragment", "Giriş başarısız: ${task.exception?.message}")
                 }
                 // TODO: Yükleniyor göstergesini gizle

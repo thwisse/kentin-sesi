@@ -37,15 +37,10 @@ class AuthActivity : AppCompatActivity() {
     override fun onStart() {
         super.onStart()
 
-        // Mevcut kullanıcıyı kontrol et
         val currentUser = auth.currentUser
         if (currentUser != null) {
-            // Kullanıcı zaten giriş yapmış (null değil)
-            // Onu MainActivity'ye yönlendir
             navigateToMain()
         }
-        // Eğer currentUser null ise (giriş yapmamışsa)
-        // hiçbir şey yapma, AuthActivity (LoginFragment) normal şekilde açılsın.
     }
 
     private fun navigateToMain() {

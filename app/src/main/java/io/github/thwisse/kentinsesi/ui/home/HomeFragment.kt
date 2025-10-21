@@ -25,7 +25,8 @@ class HomeFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
 
         binding.fabCreatePost.setOnClickListener {
-            Toast.makeText(requireContext(), "Yeni gönderi oluşturuluyor...", Toast.LENGTH_SHORT).show()
+            Toast.makeText(requireContext(), "Yeni gönderi oluşturuluyor...", Toast.LENGTH_SHORT)
+                .show()
         }
     }
 

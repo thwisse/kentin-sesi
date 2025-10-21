@@ -39,7 +39,6 @@ class RegisterFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
 
         binding.btnRegister.setOnClickListener {
-            // Kayıt olma fonksiyonunu çağır
             registerUser()
         }
 
@@ -48,41 +47,38 @@ class RegisterFragment : Fragment() {
         }
     }
 
-    // Yeni kayıt fonksiyonunu ekle
     private fun registerUser() {
         val fullName = binding.etFullName.text.toString().trim()
         val email = binding.etEmail.text.toString().trim()
         val password = binding.etPassword.text.toString().trim()
 
-        // Basit kontroller (boş olmasın)
         if (fullName.isEmpty() || email.isEmpty() || password.isEmpty()) {
-            Toast.makeText(requireContext(), "Tüm alanlar doldurulmalıdır", Toast.LENGTH_SHORT).show()
+            Toast.makeText(requireContext(), "Tüm alanlar doldurulmalıdır", Toast.LENGTH_SHORT)
+                .show()
             Log.d("RegisterFragment", "Tüm alanlar doldurulmalıdır")
             return
         }
 
         // TODO: Yükleniyor (Loading) göstergesi eklenebilir
 
-        // Firebase'e "Yeni kullanıcı oluştur" komutunu gönder
         auth.createUserWithEmailAndPassword(email, password)
             .addOnCompleteListener(requireActivity()) { task ->
                 if (task.isSuccessful) {
-                    // Kayıt başarılı!
-                    // TODO: Kullanıcının Adı Soyadı (fullName) veritabanına kaydedilmeli (Milestone 6)
-
                     Toast.makeText(requireContext(), "Kayıt başarılı!", Toast.LENGTH_SHORT).show()
                     Log.d("RegisterFragment", "Kayıt başarılı!")
 
-                    // Kullanıcıyı MainActivity'ye yönlendir
                     (activity as? AuthActivity)?.let {
                         val intent = Intent(it, MainActivity::class.java)
                         it.startActivity(intent)
-                        it.finish() // AuthActivity'yi kapat
+                        it.finish()
                     }
 
                 } else {
-                    // Kayıt başarısız oldu (Şifre çok kısa, e-posta formatı yanlış, e-posta zaten kullanımda vb.)
-                    Toast.makeText(requireContext(), "Kayıt başarısız: ${task.exception?.message}", Toast.LENGTH_LONG).show()
+                    Toast.makeText(
+                        requireContext(),
+                        "Kayıt başarısız: ${task.exception?.message}",
+                        Toast.LENGTH_LONG
+                    ).show()
                     Log.e("RegisterFragment", "Kayıt başarısız: ${task.exception?.message}")
                 }
                 // TODO: Yükleniyor göstergesini gizle
