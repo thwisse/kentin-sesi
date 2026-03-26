@@ -138,6 +138,7 @@ class MapFragment : Fragment(R.layout.fragment_map), OnMapReadyCallback, GoogleM
 
     override fun onMapReady(map: GoogleMap) {
         googleMap = map
+        googleMap?.setInfoWindowAdapter(CustomInfoWindowAdapter(requireContext()))
 
         // Baloncuk tıklamasını dinle
         map.setOnInfoWindowClickListener(this)

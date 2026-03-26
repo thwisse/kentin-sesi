@@ -492,6 +492,7 @@ class PostDetailFragment : Fragment(io.github.thwisse.kentinsesi.R.layout.fragme
     }
 
     override fun onMapReady(googleMap: GoogleMap) {
+        googleMap.setInfoWindowAdapter(io.github.thwisse.kentinsesi.ui.map.CustomInfoWindowAdapter(requireContext()))
         postLocation?.let { location ->
             googleMap.addMarker(MarkerOptions().position(location).title("Sorun Konumu"))
             googleMap.moveCamera(CameraUpdateFactory.newLatLngZoom(location, 15f))

@@ -64,8 +64,10 @@ class CommentAdapter(
             }
 
             // Metin ve Silindi Durumu Kontrolü
+            val typeFace = androidx.core.content.res.ResourcesCompat.getFont(context, io.github.thwisse.kentinsesi.R.font.outfit)
+            
             if (comment.isDeleted) {
-                binding.tvCommentText.setTypeface(null, android.graphics.Typeface.ITALIC)
+                binding.tvCommentText.setTypeface(typeFace, android.graphics.Typeface.ITALIC)
                 binding.tvCommentText.setTextColor(Color.GRAY)
                 
                 binding.tvCommentText.text = if (comment.deletedBy == "admin") {
@@ -78,7 +80,7 @@ class CommentAdapter(
                 binding.tvReplyAction.visibility = View.GONE
                 binding.root.setOnLongClickListener(null)
             } else {
-                binding.tvCommentText.setTypeface(null, android.graphics.Typeface.NORMAL)
+                binding.tvCommentText.setTypeface(typeFace, android.graphics.Typeface.NORMAL)
                 // Text Color from Theme
                 binding.tvCommentText.setTextColor(androidx.core.content.ContextCompat.getColor(context, io.github.thwisse.kentinsesi.R.color.colorCommentText))
 

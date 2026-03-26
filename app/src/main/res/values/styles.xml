@@ -10,7 +10,7 @@
         <item name="cornerRadius">@dimen/radius_capsule</item>
         <item name="android:minHeight">@dimen/height_button</item>
         <item name="android:textAllCaps">false</item>
-        <item name="android:fontFamily">@font/inter</item>
+        <item name="android:fontFamily">@font/outfit</item>
         <item name="android:letterSpacing">0</item>
         <item name="android:textSize">16sp</item>
         <item name="elevation">@dimen/elevation_none</item>
@@ -21,7 +21,7 @@
         <item name="cornerRadius">@dimen/radius_capsule</item>
         <item name="android:minHeight">@dimen/height_button</item>
         <item name="android:textAllCaps">false</item>
-        <item name="android:fontFamily">@font/inter</item>
+        <item name="android:fontFamily">@font/outfit</item>
         <item name="strokeColor">@color/colorBorder</item>
         <item name="strokeWidth">1dp</item>
         <item name="android:textColor">@color/colorTextPrimary</item>
@@ -53,33 +53,33 @@
     <!-- ========== TYPOGRAPHY ========== -->
     
     <style name="AntTextH1">
-        <item name="android:fontFamily">@font/inter</item>
+        <item name="android:fontFamily">@font/outfit</item>
         <item name="android:textSize">28sp</item>
         <item name="android:textColor">@color/colorTextPrimary</item>
         <item name="android:textFontWeight" tools:targetApi="p">700</item>
     </style>
     
     <style name="AntTextH2">
-        <item name="android:fontFamily">@font/inter</item>
+        <item name="android:fontFamily">@font/outfit</item>
         <item name="android:textSize">22sp</item>
         <item name="android:textColor">@color/colorTextPrimary</item>
         <item name="android:textFontWeight" tools:targetApi="p">600</item>
     </style>
     
     <style name="AntTextBody1">
-        <item name="android:fontFamily">@font/inter</item>
+        <item name="android:fontFamily">@font/outfit</item>
         <item name="android:textSize">15sp</item>
         <item name="android:textColor">@color/colorTextPrimary</item>
     </style>
     
     <style name="AntTextCaption">
-        <item name="android:fontFamily">@font/inter</item>
+        <item name="android:fontFamily">@font/outfit</item>
         <item name="android:textSize">14sp</item>
         <item name="android:textColor">@color/colorTextSecondary</item>
     </style>
 
     <style name="Ant.Button.Text" parent="Widget.Material3.Button.TextButton">
-        <item name="android:fontFamily">@font/inter</item>
+        <item name="android:fontFamily">@font/outfit</item>
         <item name="android:textColor">?attr/colorPrimary</item>
         <item name="android:textAllCaps">false</item>
         <item name="android:letterSpacing">0</item>
@@ -101,7 +101,7 @@
         <item name="cornerSize">@dimen/radius_m</item>
     </style>
     <style name="ToolbarTitle" parent="TextAppearance.MaterialComponents.Headline6">
-        <item name="android:fontFamily">@font/inter</item>
+        <item name="android:fontFamily">@font/outfit</item>
         <item name="android:textStyle">bold</item>
         <item name="android:textSize">21sp</item>
         <item name="android:textColor">@color/white</item>
@@ -109,13 +109,13 @@
 
     <!-- ========== BOTTOM NAV ========== -->
     <style name="BottomNav.Text.Active" parent="TextAppearance.MaterialComponents.Body2">
-        <item name="android:fontFamily">@font/inter</item>
+        <item name="android:fontFamily">@font/outfit</item>
         <item name="android:textSize">11sp</item>
         <item name="android:textColor">@color/colorOnPrimary</item>
     </style>
 
     <style name="BottomNav.Text.Inactive" parent="TextAppearance.MaterialComponents.Body2">
-        <item name="android:fontFamily">@font/inter</item>
+        <item name="android:fontFamily">@font/outfit</item>
         <item name="android:textSize">10sp</item>
     </style>
 

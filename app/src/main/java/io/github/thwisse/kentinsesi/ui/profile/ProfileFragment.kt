@@ -310,11 +310,12 @@ class ProfileFragment : Fragment(R.layout.fragment_profile) {
     
     // UI güncelleme - state restore için kullanılır
     private fun showPostsTab() {
+        val typeFace = androidx.core.content.res.ResourcesCompat.getFont(requireContext(), io.github.thwisse.kentinsesi.R.font.outfit)
         // Tab text styles
         binding.tvTabPosts.setTextColor(requireContext().getColor(R.color.colorPrimary))
-        binding.tvTabPosts.setTypeface(null, android.graphics.Typeface.BOLD)
+        binding.tvTabPosts.setTypeface(typeFace, android.graphics.Typeface.BOLD)
         binding.tvTabComments.setTextColor(requireContext().getColor(android.R.color.darker_gray))
-        binding.tvTabComments.setTypeface(null, android.graphics.Typeface.NORMAL)
+        binding.tvTabComments.setTypeface(typeFace, android.graphics.Typeface.NORMAL)
 
         // Indicator position
         updateTabIndicator(binding.tvTabPosts)
@@ -326,11 +327,12 @@ class ProfileFragment : Fragment(R.layout.fragment_profile) {
 
     // UI güncelleme - state restore için kullanılır
     private fun showCommentsTab() {
+        val typeFace = androidx.core.content.res.ResourcesCompat.getFont(requireContext(), io.github.thwisse.kentinsesi.R.font.outfit)
         // Tab text styles
         binding.tvTabComments.setTextColor(requireContext().getColor(R.color.colorPrimary))
-        binding.tvTabComments.setTypeface(null, android.graphics.Typeface.BOLD)
+        binding.tvTabComments.setTypeface(typeFace, android.graphics.Typeface.BOLD)
         binding.tvTabPosts.setTextColor(requireContext().getColor(android.R.color.darker_gray))
-        binding.tvTabPosts.setTypeface(null, android.graphics.Typeface.NORMAL)
+        binding.tvTabPosts.setTypeface(typeFace, android.graphics.Typeface.NORMAL)
 
         // Indicator position
         updateTabIndicator(binding.tvTabComments)

@@ -29,8 +29,8 @@
         <item name="colorOnError">@color/white</item>
         
         <!-- Typography -->
-        <item name="android:fontFamily">@font/inter</item>
-        <item name="fontFamily">@font/inter</item>
+        <item name="android:fontFamily">@font/outfit</item>
+        <item name="fontFamily">@font/outfit</item>
         <item name="textAppearanceBody1">@style/AntTextBody1</item>
         <item name="textAppearanceHeadline6">@style/AntTextH2</item>
         

@@ -37,8 +37,10 @@ class UserCommentAdapter(
             val context = binding.root.context
 
             // Comment text & Soft Delete UI
+            val typeFace = androidx.core.content.res.ResourcesCompat.getFont(context, io.github.thwisse.kentinsesi.R.font.outfit)
+            
             if (comment.isDeleted) {
-                binding.tvCommentText.setTypeface(null, android.graphics.Typeface.ITALIC)
+                binding.tvCommentText.setTypeface(typeFace, android.graphics.Typeface.ITALIC)
                 binding.tvCommentText.setTextColor(android.graphics.Color.GRAY)
                 
                 binding.tvCommentText.text = if (comment.deletedBy == "admin") {
@@ -51,7 +53,7 @@ class UserCommentAdapter(
                 // Detaya gitmek için tıklama kalabilir, ancak silme işlemi yapılmasın.
                 binding.root.setOnLongClickListener(null)
             } else {
-                binding.tvCommentText.setTypeface(null, android.graphics.Typeface.NORMAL)
+                binding.tvCommentText.setTypeface(typeFace, android.graphics.Typeface.NORMAL)
                 // Sabit koyu renk kullan
                 binding.tvCommentText.setTextColor(android.graphics.Color.parseColor("#333333"))
 
