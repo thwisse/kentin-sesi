@@ -18,4 +18,41 @@
         app:layout_constraintTop_toTopOf="parent"
         app:navGraph="@navigation/auth_nav_graph" />
 
+    <LinearLayout
+        android:id="@+id/layoutAuthControls"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="12dp"
+        android:orientation="horizontal"
+        android:gravity="center_vertical"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintEnd_toEndOf="parent">
+
+        <com.google.android.material.chip.Chip
+            android:id="@+id/btnThemeToggle"
+            style="@style/Widget.Material3.Chip.Assist"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="6dp"
+            android:checkable="false"
+            android:text="🌙"
+            android:textSize="15sp"
+            app:chipIconVisible="false"
+            app:ensureMinTouchTargetSize="false" />
+
+        <com.google.android.material.chip.Chip
+            android:id="@+id/btnLanguageToggle"
+            style="@style/Widget.Material3.Chip.Assist"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:checkable="false"
+            android:text="EN"
+            android:textSize="13sp"
+            android:textStyle="bold"
+            app:chipIconVisible="false"
+            app:ensureMinTouchTargetSize="false" />
+
+    </LinearLayout>
+
 </androidx.constraintlayout.widget.ConstraintLayout>
