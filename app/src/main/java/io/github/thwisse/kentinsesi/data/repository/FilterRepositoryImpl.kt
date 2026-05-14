@@ -1,6 +1,9 @@
 package io.github.thwisse.kentinsesi.data.repository
 
+import android.content.Context
 import android.database.sqlite.SQLiteConstraintException
+import dagger.hilt.android.qualifiers.ApplicationContext
+import io.github.thwisse.kentinsesi.R
 import io.github.thwisse.kentinsesi.data.local.db.FilterPresetDao
 import io.github.thwisse.kentinsesi.data.local.db.FilterPresetEntity
 import io.github.thwisse.kentinsesi.data.local.preferences.FilterPreferences
@@ -15,7 +18,8 @@ import javax.inject.Inject
 
 class FilterRepositoryImpl @Inject constructor(
     private val dao: FilterPresetDao,
-    private val prefs: FilterPreferences
+    private val prefs: FilterPreferences,
+    @ApplicationContext private val context: Context
 ) : FilterRepository {
 
     companion object {
@@ -53,12 +57,12 @@ class FilterRepositoryImpl @Inject constructor(
             prefs.setExamplePresetCreated(true)
             Resource.Success(Unit)
         } catch (e: Exception) {
-            Resource.Error(e.message ?: "Varsayılan filtre oluşturulamadı")
+            Resource.Error(e.message ?: context.getString(R.string.error_filter_default_create))
         }
     }
 
     override suspend fun savePreset(name: String, criteria: FilterCriteria): Resource<Unit> {
-        if (name.isBlank()) return Resource.Error("Filtre adı boş olamaz")
+        if (name.isBlank()) return Resource.Error(context.getString(R.string.error_filter_name_blank))
 
         return try {
             val entity = FilterPresetEntity(
@@ -74,9 +78,9 @@ class FilterRepositoryImpl @Inject constructor(
             dao.insert(entity)
             Resource.Success(Unit)
         } catch (e: SQLiteConstraintException) {
-            Resource.Error("Bu isimde bir filtre zaten var")
+            Resource.Error(context.getString(R.string.error_filter_name_exists))
         } catch (e: Exception) {
-            Resource.Error(e.message ?: "Filtre kaydedilemedi")
+            Resource.Error(e.message ?: context.getString(R.string.filter_save_failed))
         }
     }
 
@@ -93,23 +97,22 @@ class FilterRepositoryImpl @Inject constructor(
 
             Resource.Success(Unit)
         } catch (e: Exception) {
-            Resource.Error(e.message ?: "Filtre silinemedi")
+            Resource.Error(e.message ?: context.getString(R.string.error_filter_delete))
         }
     }
 
     override suspend fun setDefaultPreset(id: String): Resource<Unit> {
         return try {
-            val preset = dao.getById(id) ?: return Resource.Error("Filtre bulunamadı")
+            val preset = dao.getById(id) ?: return Resource.Error(context.getString(R.string.error_filter_not_found))
             dao.clearDefaultFlag()
             dao.setDefaultFlag(preset.id)
 
-            // Default seçildiyse uygulama restart'ta bununla başlasın
             prefs.setLastAppliedPresetId(preset.id)
             prefs.setLastCriteria(null)
 
             Resource.Success(Unit)
         } catch (e: Exception) {
-            Resource.Error(e.message ?: "Varsayılan filtre ayarlanamadı")
+            Resource.Error(e.message ?: context.getString(R.string.error_filter_default_set))
         }
     }
 
@@ -130,7 +133,7 @@ class FilterRepositoryImpl @Inject constructor(
             prefs.setLastAppliedPresetId(id)
             Resource.Success(Unit)
         } catch (e: Exception) {
-            Resource.Error(e.message ?: "Son filtre kaydedilemedi")
+            Resource.Error(e.message ?: context.getString(R.string.error_filter_last_save))
         }
     }
 
@@ -143,7 +146,7 @@ class FilterRepositoryImpl @Inject constructor(
             prefs.setLastCriteria(criteria)
             Resource.Success(Unit)
         } catch (e: Exception) {
-            Resource.Error(e.message ?: "Son filtre kaydedilemedi")
+            Resource.Error(e.message ?: context.getString(R.string.error_filter_last_save))
         }
     }
 

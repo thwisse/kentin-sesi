@@ -49,7 +49,7 @@ class MapFragment : Fragment(R.layout.fragment_map), OnMapReadyCallback, GoogleM
             if (isGranted) {
                 enableMyLocation()
             } else {
-                Toast.makeText(requireContext(), "Konumunuza gitmek için izin gerekli.", Toast.LENGTH_SHORT).show()
+                Toast.makeText(requireContext(), getString(R.string.location_permission_required), Toast.LENGTH_SHORT).show()
             }
         }
 
@@ -95,10 +95,10 @@ class MapFragment : Fragment(R.layout.fragment_map), OnMapReadyCallback, GoogleM
     }
 
     private fun showFilterChoiceDialog() {
-        val items = arrayOf("Filtrelerim", "Yeni filtre ayarla")
+        val items = arrayOf(getString(R.string.filter_my_filters), getString(R.string.filter_new_filter))
 
         MaterialAlertDialogBuilder(requireContext())
-            .setTitle("Filtre")
+            .setTitle(R.string.filter_dialog_title)
             .setItems(items) { _, which ->
                 when (which) {
                     0 -> {
@@ -115,7 +115,7 @@ class MapFragment : Fragment(R.layout.fragment_map), OnMapReadyCallback, GoogleM
                     }
                 }
             }
-            .setNegativeButton("İptal", null)
+            .setNegativeButton(R.string.cancel, null)
             .show()
     }
 
@@ -133,7 +133,7 @@ class MapFragment : Fragment(R.layout.fragment_map), OnMapReadyCallback, GoogleM
                 onlyMyPosts = onlyMyPosts
             )
 
-            Toast.makeText(requireContext(), "Filtreler uygulandı", Toast.LENGTH_SHORT).show()
+            Toast.makeText(requireContext(), getString(R.string.filter_applied), Toast.LENGTH_SHORT).show()
         }
     }
 
@@ -164,7 +164,7 @@ class MapFragment : Fragment(R.layout.fragment_map), OnMapReadyCallback, GoogleM
                 val lm = requireContext().getSystemService(LocationManager::class.java)
                 val enabled = lm != null && LocationManagerCompat.isLocationEnabled(lm)
                 if (!enabled) {
-                    Toast.makeText(requireContext(), "Konumunuz kapalı. Lütfen konumu açın.", Toast.LENGTH_SHORT).show()
+                    Toast.makeText(requireContext(), getString(R.string.location_disabled), Toast.LENGTH_SHORT).show()
                     true
                 } else {
                     false
@@ -227,7 +227,7 @@ class MapFragment : Fragment(R.layout.fragment_map), OnMapReadyCallback, GoogleM
             try {
                 findNavController().navigate(R.id.action_nav_map_to_postDetailFragment, bundle)
             } catch (e: Exception) {
-                Toast.makeText(requireContext(), "Navigasyon hatası", Toast.LENGTH_SHORT).show()
+                Toast.makeText(requireContext(), getString(R.string.navigation_error), Toast.LENGTH_SHORT).show()
             }
         }
     }

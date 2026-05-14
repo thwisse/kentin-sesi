@@ -1,11 +1,14 @@
 package io.github.thwisse.kentinsesi.ui.post
 
+import android.content.Context
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MediatorLiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import dagger.hilt.android.lifecycle.HiltViewModel
+import dagger.hilt.android.qualifiers.ApplicationContext
+import io.github.thwisse.kentinsesi.R
 import io.github.thwisse.kentinsesi.data.model.Comment
 import io.github.thwisse.kentinsesi.data.model.Post
 import io.github.thwisse.kentinsesi.data.model.PostStatus
@@ -22,7 +25,8 @@ import javax.inject.Inject
 class PostDetailViewModel @Inject constructor(
     private val postRepository: PostRepository,
     private val authRepository: AuthRepository,
-    private val userRepository: UserRepository // Yetkili kontrolü için
+    private val userRepository: UserRepository,
+    @ApplicationContext private val context: Context
 ) : ViewModel() {
 
     private val _commentsState = MutableLiveData<Resource<List<Comment>>>()
@@ -159,7 +163,7 @@ class PostDetailViewModel @Inject constructor(
                 }
                 is Resource.Error -> {
                     // Hata durumunda bir şey yapma, Fragment handle edecek
-                    _postLoadState.value = Resource.Error(result.message ?: "Post yüklenemedi")
+                    _postLoadState.value = Resource.Error(result.message ?: context.getString(R.string.error_post_load))
                 }
                 is Resource.Loading -> {
                     // Loading durumu
@@ -251,7 +255,7 @@ class PostDetailViewModel @Inject constructor(
             
             // Yetki kontrolü
             if (!AuthorizationUtils.canDeletePost(user, post?.authorId)) {
-                _deletePostState.value = Resource.Error("Bu işlem için yetkiniz yok.")
+                _deletePostState.value = Resource.Error(context.getString(R.string.error_no_permission))
                 return@launch
             }
             
@@ -279,7 +283,7 @@ class PostDetailViewModel @Inject constructor(
             val canUpdate = AuthorizationUtils.canUpdatePostStatus(user) || isOwner
             
             if (!canUpdate) {
-                _updateStatusState.value = Resource.Error("Post durumunu güncellemek için yetkiniz yok.")
+                _updateStatusState.value = Resource.Error(context.getString(R.string.error_no_status_update_permission))
                 return@launch
             }
             

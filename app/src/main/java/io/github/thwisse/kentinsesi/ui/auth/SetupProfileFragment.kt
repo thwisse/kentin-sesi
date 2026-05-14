@@ -14,6 +14,7 @@ import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.lifecycleScope
 import androidx.lifecycle.repeatOnLifecycle
 import dagger.hilt.android.AndroidEntryPoint
+import io.github.thwisse.kentinsesi.R
 import io.github.thwisse.kentinsesi.databinding.FragmentSetupProfileBinding
 import io.github.thwisse.kentinsesi.ui.AuthActivity
 import io.github.thwisse.kentinsesi.ui.MainActivity
@@ -118,7 +119,7 @@ class SetupProfileFragment : Fragment() {
             val district = binding.actvDistrict.text.toString().trim()
 
             if (fullName.isEmpty()) {
-                binding.tilFullName.error = "İsim boş bırakılamaz"
+                binding.tilFullName.error = getString(R.string.validation_name_required)
                 return@setOnClickListener
             } else {
                 binding.tilFullName.error = null
@@ -130,17 +131,17 @@ class SetupProfileFragment : Fragment() {
 
             val usernameRegex = Regex("^[a-z0-9_]{3,20}$")
             if (username.isBlank()) {
-                binding.tilUsername.error = "Kullanıcı adı boş bırakılamaz"
+                binding.tilUsername.error = getString(R.string.validation_username_required)
                 return@setOnClickListener
             } else if (!usernameRegex.matches(username)) {
-                binding.tilUsername.error = "Kullanıcı adı 3-20 karakter olmalı (a-z, 0-9, _)"
+                binding.tilUsername.error = getString(R.string.validation_username_format)
                 return@setOnClickListener
             } else {
                 binding.tilUsername.error = null
             }
 
             if (district.isEmpty()) {
-                binding.tilDistrict.error = "Lütfen ilçe seçiniz"
+                binding.tilDistrict.error = getString(R.string.validation_district_required)
                 return@setOnClickListener
             } else {
                 binding.tilDistrict.error = null
@@ -164,7 +165,7 @@ class SetupProfileFragment : Fragment() {
 
                     when (resource) {
                         is Resource.Success -> {
-                            Toast.makeText(requireContext(), "Profilin hazır!", Toast.LENGTH_SHORT).show()
+                            Toast.makeText(requireContext(), getString(R.string.profile_ready), Toast.LENGTH_SHORT).show()
                             // Burası AuthActivity'yi bitirip MainActivity'yi başlatır
                             navigateToMain()
                         }

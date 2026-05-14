@@ -52,8 +52,8 @@ class LoginFragment : Fragment() {
             val password = binding.etPassword.text.toString().trim()
 
             // ValidationUtils kullanarak daha iyi hata mesajları gösteriyoruz
-            val emailError = ValidationUtils.getValidationError("email", email)
-            val passwordError = ValidationUtils.getValidationError("password", password)
+            val emailError = ValidationUtils.getValidationError("email", email, requireContext())
+            val passwordError = ValidationUtils.getValidationError("password", password, requireContext())
 
             when {
                 email.isEmpty() -> {

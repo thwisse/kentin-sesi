@@ -139,6 +139,13 @@
     <string name="comment_empty">Yorum boş olamaz</string>
     <string name="post_id_not_found">Post ID bulunamadı</string>
     <string name="just_now">Az önce</string>
+    <string name="time_just_now">Az önce</string>
+    <string name="time_minutes_ago">%d dakika önce</string>
+    <string name="time_hours_ago">%d saat önce</string>
+    <string name="time_days_ago">%d gün önce</string>
+    <string name="time_weeks_ago">%d hafta önce</string>
+    <string name="time_months_ago">%d ay önce</string>
+    <string name="time_years_ago">%d yıl önce</string>
     <string name="anonymous_user">Anonim</string>
 
     <!-- Status Updates -->
@@ -296,5 +303,94 @@
     
     <!-- Copyright and Trademark Notice - Turkish -->
     <string name="about_copyright_notice">Kentin Sesi v1.0\n© 2026 zibidiSoft. Tüm Hakları Saklıdır.\n\n\'Kentin Sesi\' ismi ve logoları zibidiSoft\'un ticari markasıdır ve izinsiz kullanılamaz.</string>
+
+    <!-- Location / Permission -->
+    <string name="location_permission_required">Konumunuza gitmek için konum izni gereklidir.</string>
+    <string name="location_disabled">Konumunuz kapalı. Lütfen konumu açın.</string>
+    <string name="navigation_error">Navigasyon hatası</string>
+
+    <!-- Profile States -->
+    <string name="profile_ready">Profilin hazır!</string>
+    <string name="name_not_specified">İsim Belirtilmemiş</string>
+    <string name="location_not_specified">Konum Belirtilmemiş</string>
+    <string name="default_user_title">Kullanıcı</string>
+
+    <!-- Admin -->
+    <string name="access_denied">Bu sayfaya erişim yetkiniz yok.</string>
+    <string name="role_updated">Rol güncellendi</string>
+
+    <!-- Comments -->
+    <string name="replying_to">%1$s kişisine yanıt</string>
+
+    <!-- Validation (inline) -->
+    <string name="validation_name_required">İsim boş bırakılamaz</string>
+    <string name="validation_username_required">Kullanıcı adı boş bırakılamaz</string>
+    <string name="validation_username_format">Kullanıcı adı 3–20 karakter olmalı (a-z, 0-9, _)</string>
+    <string name="validation_district_required">Lütfen ilçe seçiniz</string>
+
+    <!-- Auth Errors -->
+    <string name="auth_error_invalid_email">Geçersiz e-posta adresi</string>
+    <string name="auth_error_wrong_password">Hatalı şifre</string>
+    <string name="auth_error_user_not_found">Kullanıcı bulunamadı</string>
+    <string name="auth_error_user_disabled">Bu hesap devre dışı bırakılmış</string>
+    <string name="auth_error_email_in_use">Bu e-posta adresi zaten kullanılıyor</string>
+    <string name="auth_error_weak_password">Şifre çok zayıf. En az 6 karakter olmalıdır</string>
+    <string name="auth_error_network">İnternet bağlantısı hatası</string>
+    <string name="auth_error_too_many_requests">Çok fazla deneme. Lütfen daha sonra tekrar deneyin</string>
+    <string name="auth_error_generic">Bir hata oluştu</string>
+    <string name="auth_error_login">Giriş yapılırken bir hata oluştu</string>
+    <string name="auth_error_register">Kayıt olurken bir hata oluştu</string>
+
+    <!-- Repository Errors -->
+    <string name="error_profile_create">Profil oluşturulamadı.</string>
+    <string name="error_username_invalid">Geçersiz kullanıcı adı</string>
+    <string name="error_username_cannot_change">Kullanıcı adı değiştirilemez</string>
+    <string name="error_username_taken">Bu kullanıcı adı zaten alınmış</string>
+    <string name="error_profile_update">Profil güncellenemedi.</string>
+    <string name="error_user_data_read">Kullanıcı verisi okunamadı.</string>
+    <string name="error_user_not_found">Kullanıcı bulunamadı.</string>
+    <string name="error_user_info_fetch">Kullanıcı bilgisi alınamadı.</string>
+    <string name="error_user_role_fetch">Kullanıcı rolü alınamadı.</string>
+    <string name="error_users_fetch">Kullanıcılar alınamadı.</string>
+    <string name="error_role_update">Rol güncellenemedi.</string>
+
+    <!-- Post Repository Errors -->
+    <string name="error_operation_failed">İşlem başarısız</string>
+    <string name="error_data_fetch">Veriler alınırken hata oluştu</string>
+    <string name="error_comments_fetch">Yorumlar alınamadı</string>
+    <string name="error_not_logged_in">Oturum açılmamış</string>
+    <string name="error_comment_send">Yorum gönderilemedi</string>
+    <string name="error_reply_target_not_found">Yanıtlanacak yorum bulunamadı</string>
+    <string name="error_reply_target_read">Yanıtlanacak yorum okunamadı</string>
+    <string name="error_reply_send">Yanıt gönderilemedi</string>
+    <string name="error_post_data_read">Post verisi okunamadı</string>
+    <string name="error_post_not_found">Post bulunamadı</string>
+    <string name="error_post_fetch">Post alınamadı</string>
+    <string name="error_status_updates_fetch">Güncellemeler alınamadı</string>
+
+    <!-- Filter Repository Errors -->
+    <string name="error_filter_not_found">Filtre bulunamadı</string>
+    <string name="error_filter_default_create">Varsayılan filtre oluşturulamadı</string>
+    <string name="error_filter_name_blank">Filtre adı boş olamaz</string>
+    <string name="error_filter_default_set">Varsayılan filtre ayarlanamadı</string>
+    <string name="error_filter_name_exists">Bu isimde bir filtre zaten var</string>
+    <string name="error_filter_delete">Filtre silinemedi</string>
+    <string name="error_filter_last_save">Son filtre kaydedilemedi</string>
+
+    <!-- ViewModel Errors -->
+    <string name="error_post_load">Post yüklenemedi</string>
+    <string name="error_no_permission">Bu işlem için yetkiniz yok</string>
+    <string name="error_no_status_update_permission">Post durumunu güncellemek için yetkiniz yok</string>
+    <string name="error_admin_required">Bu işlem için admin yetkisi gereklidir</string>
+
+    <!-- UI Fallbacks -->
+    <string name="name_unnamed">İsimsiz</string>
+    <string name="update_count_format">%d Güncelleme</string>
+    <string name="filter_all_fallback">Tümü</string>
+
+    <!-- User Roles (display) -->
+    <string name="role_citizen">Vatandaş</string>
+    <string name="role_official">Yetkili</string>
+    <string name="role_admin">Admin</string>
 
 </resources>

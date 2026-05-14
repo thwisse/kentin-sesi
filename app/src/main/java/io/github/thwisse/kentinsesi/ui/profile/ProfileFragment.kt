@@ -186,7 +186,7 @@ class ProfileFragment : Fragment(R.layout.fragment_profile) {
                         }
 
                         // Kullanıcı adını göster
-                        binding.tvUserName.text = user.fullName.ifEmpty { "İsim Belirtilmemiş" }
+                        binding.tvUserName.text = user.fullName.ifEmpty { getString(R.string.name_not_specified) }
                         
                         // Avatar yükle
                         binding.ivProfileAvatar.loadAvatar(user.avatarSeed)
@@ -205,7 +205,7 @@ class ProfileFragment : Fragment(R.layout.fragment_profile) {
                                 "${user.city}, ${user.district}"
                             user.city.isNotEmpty() -> user.city
                             user.district.isNotEmpty() -> user.district
-                            else -> "Konum Belirtilmemiş"
+                            else -> getString(R.string.location_not_specified)
                         }
                         binding.tvUserLocation.text = locationText
                     } else {
@@ -214,10 +214,10 @@ class ProfileFragment : Fragment(R.layout.fragment_profile) {
                             isAdminUser = false
                             requireActivity().invalidateOptionsMenu()
                         }
-                        binding.tvUserName.text = "Kullanıcı"
+                        binding.tvUserName.text = getString(R.string.default_user_title)
                         binding.tvUserUsername.visibility = View.GONE
                         binding.tvUserUsername.text = ""
-                        binding.tvUserLocation.text = "Konum Belirtilmemiş"
+                        binding.tvUserLocation.text = getString(R.string.location_not_specified)
                     }
                 }
                 is Resource.Error -> {
@@ -226,10 +226,10 @@ class ProfileFragment : Fragment(R.layout.fragment_profile) {
                         isAdminUser = false
                         requireActivity().invalidateOptionsMenu()
                     }
-                    binding.tvUserName.text = "Kullanıcı"
+                    binding.tvUserName.text = getString(R.string.default_user_title)
                     binding.tvUserUsername.visibility = View.GONE
                     binding.tvUserUsername.text = ""
-                    binding.tvUserLocation.text = "Konum Belirtilmemiş"
+                    binding.tvUserLocation.text = getString(R.string.location_not_specified)
                 }
                 is Resource.Loading -> {
                     // Loading durumu
@@ -260,11 +260,11 @@ class ProfileFragment : Fragment(R.layout.fragment_profile) {
                         if (exists) {
                             findNavController().navigate(R.id.action_nav_profile_to_postDetailFragment, bundle)
                         } else {
-                            Toast.makeText(requireContext(), "Bu post silinmiş", Toast.LENGTH_SHORT).show()
+                            Toast.makeText(requireContext(), getString(R.string.post_deleted), Toast.LENGTH_SHORT).show()
                         }
                     }
                 } else {
-                    Toast.makeText(requireContext(), "Post detayına gidilemiyor", Toast.LENGTH_SHORT).show()
+                    Toast.makeText(requireContext(), getString(R.string.cannot_go_to_post), Toast.LENGTH_SHORT).show()
                 }
             },
             onItemLongClick = { comment ->
@@ -279,10 +279,10 @@ class ProfileFragment : Fragment(R.layout.fragment_profile) {
         com.google.android.material.dialog.MaterialAlertDialogBuilder(requireContext())
             .setTitle(R.string.dialog_delete_comment_title)
             .setMessage(R.string.dialog_delete_comment_message)
-            .setPositiveButton("Sil") { _, _ ->
+            .setPositiveButton(R.string.delete) { _, _ ->
                 viewModel.deleteComment(comment)
             }
-            .setNegativeButton("İptal", null)
+            .setNegativeButton(R.string.cancel, null)
             .show()
     }
 

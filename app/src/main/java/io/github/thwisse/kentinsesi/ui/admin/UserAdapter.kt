@@ -9,6 +9,7 @@ import android.widget.Toast
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
+import io.github.thwisse.kentinsesi.R
 import io.github.thwisse.kentinsesi.data.model.User
 import io.github.thwisse.kentinsesi.data.model.UserRole
 import io.github.thwisse.kentinsesi.databinding.ItemUserAdminBinding
@@ -41,7 +42,8 @@ class UserAdapter(
         fun bind(user: User) {
             currentUser = user
             
-            binding.tvUserName.text = user.fullName.ifEmpty { "İsimsiz" }
+            val ctx = binding.root.context
+            binding.tvUserName.text = user.fullName.ifEmpty { ctx.getString(R.string.name_unnamed) }
             binding.tvUserUsername.visibility = if (user.username.isNotBlank()) View.VISIBLE else View.GONE
             binding.tvUserUsername.text = if (user.username.isNotBlank()) "@${user.username}" else ""
             binding.tvUserEmail.text = user.email
@@ -52,11 +54,15 @@ class UserAdapter(
             } else if (user.district.isNotEmpty()) {
                 user.district
             } else {
-                "Konum belirtilmemiş"
+                ctx.getString(R.string.location_not_specified)
             }
 
             // Role spinner'ı doldur
-            val roles = listOf("Vatandaş", "Yetkili", "Admin")
+            val roles = listOf(
+                ctx.getString(R.string.role_citizen),
+                ctx.getString(R.string.role_official),
+                ctx.getString(R.string.role_admin)
+            )
             val roleAdapter = ArrayAdapter(
                 binding.root.context,
                 android.R.layout.simple_spinner_item,

@@ -1,11 +1,14 @@
 package io.github.thwisse.kentinsesi.data.repository
 
+import android.content.Context
 import android.net.Uri
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.FieldValue
 import com.google.firebase.firestore.FirebaseFirestore
 import com.google.firebase.firestore.GeoPoint
 import com.google.firebase.storage.FirebaseStorage
+import dagger.hilt.android.qualifiers.ApplicationContext
+import io.github.thwisse.kentinsesi.R
 import io.github.thwisse.kentinsesi.data.model.Comment
 import io.github.thwisse.kentinsesi.data.model.Post
 import io.github.thwisse.kentinsesi.data.model.PostStatus
@@ -19,7 +22,8 @@ import javax.inject.Inject
 class PostRepositoryImpl @Inject constructor(
     private val firestore: FirebaseFirestore,
     private val storage: FirebaseStorage,
-    private val auth: FirebaseAuth
+    private val auth: FirebaseAuth,
+    @ApplicationContext private val context: Context
 ) : PostRepository {
 
     override suspend fun createPost(
@@ -34,7 +38,7 @@ class PostRepositoryImpl @Inject constructor(
         return try {
             val currentUser = auth.currentUser
             if (currentUser == null) {
-                return Resource.Error("Kullanıcı oturumu bulunamadı.")
+                return Resource.Error(context.getString(R.string.user_session_not_found))
             }
 
             val imageFileName = "${UUID.randomUUID()}.jpg"
@@ -76,7 +80,7 @@ class PostRepositoryImpl @Inject constructor(
             val initialUpdate = hashMapOf(
                 "postId" to postId,
                 "status" to "new",
-                "note" to "Paylaşım yapıldı",
+                "note" to context.getString(R.string.initial_status_note),
                 "authorId" to currentUser.uid,
                 "authorFullName" to (profile?.fullName ?: ""),
                 "authorUsername" to (profile?.username ?: ""),
@@ -91,7 +95,7 @@ class PostRepositoryImpl @Inject constructor(
             
             Resource.Success(Unit)
         } catch (e: Exception) {
-            Resource.Error(e.message ?: "Hata")
+            Resource.Error(e.message ?: context.getString(R.string.error))
         }
     }
 
@@ -116,7 +120,7 @@ class PostRepositoryImpl @Inject constructor(
 
             Resource.Success(Unit)
         } catch (e: Exception) {
-            Resource.Error(e.message ?: "İşlem başarısız")
+            Resource.Error(e.message ?: context.getString(R.string.error_operation_failed))
         }
     }
 
@@ -245,7 +249,7 @@ class PostRepositoryImpl @Inject constructor(
 
             Resource.Success(postList)
         } catch (e: Exception) {
-            Resource.Error(e.message ?: "Veriler alınırken hata oluştu.")
+            Resource.Error(e.message ?: context.getString(R.string.error_data_fetch))
         }
     }
 
@@ -279,7 +283,7 @@ class PostRepositoryImpl @Inject constructor(
             Resource.Success(comments)
         } catch (e: Exception) {
             android.util.Log.e("GetComments", "Error: ${e.message}")
-            Resource.Error(e.message ?: "Yorumlar alınamadı.")
+            Resource.Error(e.message ?: context.getString(R.string.error_comments_fetch))
         }
     }
 
@@ -356,14 +360,14 @@ class PostRepositoryImpl @Inject constructor(
             Resource.Success(flattened)
         } catch (e: Exception) {
             android.util.Log.e("GetThreadedComments", "Error: ${e.message}")
-            Resource.Error(e.message ?: "Yorumlar alınamadı.")
+            Resource.Error(e.message ?: context.getString(R.string.error_comments_fetch))
         }
     }
 
     override suspend fun addComment(postId: String, text: String): Resource<Unit> {
         return try {
             // 2. DÜZELTME: 'currentUser' yerine 'auth.currentUser' yazıldı.
-            val user = auth.currentUser ?: throw Exception("Oturum açılmamış.")
+            val user = auth.currentUser ?: throw Exception(context.getString(R.string.error_not_logged_in))
 
             val userDoc = firestore.collection(Constants.COLLECTION_USERS).document(user.uid).get().await()
             val profile = userDoc.toObject(User::class.java)
@@ -410,7 +414,7 @@ class PostRepositoryImpl @Inject constructor(
 
             Resource.Success(Unit)
         } catch (e: Exception) {
-            Resource.Error(e.message ?: "Yorum gönderilemedi.")
+            Resource.Error(e.message ?: context.getString(R.string.error_comment_send))
         }
     }
 
@@ -422,7 +426,7 @@ class PostRepositoryImpl @Inject constructor(
         replyToAuthorFullName: String?
     ): Resource<Unit> {
         return try {
-            val user = auth.currentUser ?: throw Exception("Oturum açılmamış.")
+            val user = auth.currentUser ?: throw Exception(context.getString(R.string.error_not_logged_in))
 
             val userDoc = firestore.collection(Constants.COLLECTION_USERS).document(user.uid).get().await()
             val profile = userDoc.toObject(User::class.java)
@@ -447,11 +451,11 @@ class PostRepositoryImpl @Inject constructor(
 
             val parentDoc = commentsCol.document(parentCommentId).get().await()
             if (!parentDoc.exists()) {
-                return Resource.Error("Yanıtlanacak yorum bulunamadı")
+                return Resource.Error(context.getString(R.string.error_reply_target_not_found))
             }
 
             val parent = parentDoc.toObject(Comment::class.java)
-                ?: return Resource.Error("Yanıtlanacak yorum okunamadı")
+                ?: return Resource.Error(context.getString(R.string.error_reply_target_read))
             parent.id = parentDoc.id  // Manually set ID instead of using copy()
 
 
@@ -510,7 +514,7 @@ class PostRepositoryImpl @Inject constructor(
 
             Resource.Success(Unit)
         } catch (e: Exception) {
-            Resource.Error(e.message ?: "Yanıt gönderilemedi.")
+            Resource.Error(e.message ?: context.getString(R.string.error_reply_send))
         }
     }
 
@@ -523,7 +527,7 @@ class PostRepositoryImpl @Inject constructor(
                 .await()
             Resource.Success(Unit)
         } catch (e: Exception) {
-            Resource.Error(e.message ?: "Güncelleme başarısız.")
+            Resource.Error(e.message ?: context.getString(R.string.status_update_error))
         }
     }
 
@@ -601,7 +605,7 @@ class PostRepositoryImpl @Inject constructor(
             }
             Resource.Success(postList)
         } catch (e: Exception) {
-            Resource.Error(e.message ?: "Veriler alınamadı.")
+            Resource.Error(e.message ?: context.getString(R.string.error_data_fetch))
         }
     }
     
@@ -617,13 +621,13 @@ class PostRepositoryImpl @Inject constructor(
                 if (post != null) {
                     Resource.Success(if (post.id.isBlank()) post.copy(id = document.id) else post)
                 } else {
-                    Resource.Error("Post verisi okunamadı.")
+                    Resource.Error(context.getString(R.string.error_post_data_read))
                 }
             } else {
-                Resource.Error("Post bulunamadı.")
+                Resource.Error(context.getString(R.string.error_post_not_found))
             }
         } catch (e: Exception) {
-            Resource.Error(e.message ?: "Post alınamadı.")
+            Resource.Error(e.message ?: context.getString(R.string.error_post_fetch))
         }
     }
     
@@ -665,7 +669,7 @@ class PostRepositoryImpl @Inject constructor(
             }
             Resource.Success(comments)
         } catch (e: Exception) {
-            Resource.Error(e.message ?: "Yorumlar alınamadı.")
+            Resource.Error(e.message ?: context.getString(R.string.error_comments_fetch))
         }
     }
     
@@ -701,7 +705,7 @@ class PostRepositoryImpl @Inject constructor(
             
             Resource.Success(updates)
         } catch (e: Exception) {
-            Resource.Error(e.message ?: "Güncellemeler alınamadı.")
+            Resource.Error(e.message ?: context.getString(R.string.error_status_updates_fetch))
         }
     }
     
@@ -711,7 +715,7 @@ class PostRepositoryImpl @Inject constructor(
         note: String
     ): Resource<Unit> {
         return try {
-            val user = auth.currentUser ?: throw Exception("Oturum açılmamış.")
+            val user = auth.currentUser ?: throw Exception(context.getString(R.string.error_not_logged_in))
             
             // Kullanıcı bilgilerini çek
             val userDoc = firestore.collection(Constants.COLLECTION_USERS)
@@ -759,7 +763,7 @@ class PostRepositoryImpl @Inject constructor(
             
             Resource.Success(Unit)
         } catch (e: Exception) {
-            Resource.Error(e.message ?: "Durum güncellenemedi.")
+            Resource.Error(e.message ?: context.getString(R.string.status_update_error))
         }
     }
 }

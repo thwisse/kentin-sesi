@@ -35,7 +35,7 @@ class AdminPanelFragment : Fragment(R.layout.fragment_admin_panel) {
             }
 
             if (!user.isAdmin) {
-                Toast.makeText(requireContext(), "Bu sayfaya erişim yetkiniz yok.", Toast.LENGTH_SHORT).show()
+                Toast.makeText(requireContext(), getString(R.string.access_denied), Toast.LENGTH_SHORT).show()
                 findNavController().navigateUp()
                 return@observe
             }
@@ -97,7 +97,7 @@ class AdminPanelFragment : Fragment(R.layout.fragment_admin_panel) {
         viewModel.updateRoleState.observe(viewLifecycleOwner) { resource ->
             when (resource) {
                 is Resource.Success -> {
-                    Toast.makeText(requireContext(), "Rol güncellendi", Toast.LENGTH_SHORT).show()
+                    Toast.makeText(requireContext(), getString(R.string.role_updated), Toast.LENGTH_SHORT).show()
                 }
                 is Resource.Error -> {
                     Toast.makeText(requireContext(), resource.message, Toast.LENGTH_SHORT).show()

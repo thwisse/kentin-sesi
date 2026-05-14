@@ -34,7 +34,7 @@ class LocationPickerFragment : Fragment(R.layout.fragment_location_picker), OnMa
             if (isGranted) {
                 enableMyLocation()
             } else {
-                Toast.makeText(requireContext(), "Konumunuza gitmek için izin gerekli.", Toast.LENGTH_SHORT).show()
+                Toast.makeText(requireContext(), getString(R.string.location_permission_required), Toast.LENGTH_SHORT).show()
             }
         }
 
@@ -72,7 +72,7 @@ class LocationPickerFragment : Fragment(R.layout.fragment_location_picker), OnMa
                 val lm = requireContext().getSystemService(LocationManager::class.java)
                 val enabled = lm != null && LocationManagerCompat.isLocationEnabled(lm)
                 if (!enabled) {
-                    Toast.makeText(requireContext(), "Konumunuz kapalı. Lütfen konumu açın.", Toast.LENGTH_SHORT).show()
+                    Toast.makeText(requireContext(), getString(R.string.location_disabled), Toast.LENGTH_SHORT).show()
                     true
                 } else {
                     false

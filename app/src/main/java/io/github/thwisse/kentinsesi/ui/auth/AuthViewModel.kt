@@ -1,11 +1,14 @@
 package io.github.thwisse.kentinsesi.ui.auth
 
+import android.content.Context
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.google.firebase.auth.AuthResult
 import dagger.hilt.android.lifecycle.HiltViewModel
+import dagger.hilt.android.qualifiers.ApplicationContext
+import io.github.thwisse.kentinsesi.R
 import io.github.thwisse.kentinsesi.data.repository.AuthRepository
 import io.github.thwisse.kentinsesi.data.repository.UserRepository
 import io.github.thwisse.kentinsesi.util.Resource
@@ -23,7 +26,8 @@ sealed class AuthState {
 @HiltViewModel
 class AuthViewModel @Inject constructor(
     private val authRepository: AuthRepository,
-    private val userRepository: UserRepository
+    private val userRepository: UserRepository,
+    @ApplicationContext private val context: Context
 ) : ViewModel() {
 
     // --- Giriş Durumu ---
@@ -51,11 +55,11 @@ class AuthViewModel @Inject constructor(
                     result.data?.let { authResult ->
                         _loginState.value = AuthState.Success(authResult)
                     } ?: run {
-                        _loginState.value = AuthState.Error("Giriş başarılı ancak veri alınamadı")
+                        _loginState.value = AuthState.Error(context.getString(R.string.login_success_no_data))
                     }
                 }
                 is Resource.Error -> {
-                    _loginState.value = AuthState.Error(result.message ?: "Giriş hatası")
+                    _loginState.value = AuthState.Error(result.message ?: context.getString(R.string.login_error))
                 }
                 is Resource.Loading -> {
                     // Zaten Loading durumundayız
@@ -87,22 +91,22 @@ class AuthViewModel @Inject constructor(
                                 authData?.let {
                                     _registrationState.value = AuthState.Success(it)
                                 } ?: run {
-                                    _registrationState.value = AuthState.Error("Kayıt başarılı ancak veri alınamadı")
+                                    _registrationState.value = AuthState.Error(context.getString(R.string.registration_success_no_data))
                                 }
                             }
                             is Resource.Error -> {
-                                _registrationState.value = AuthState.Error(profileResource.message ?: "Profil hatası")
+                                _registrationState.value = AuthState.Error(profileResource.message ?: context.getString(R.string.profile_error))
                             }
                             is Resource.Loading -> {
                                 // Loading durumu zaten başta set edildi
                             }
                         }
                     } else {
-                        _registrationState.value = AuthState.Error("Kullanıcı verisi alınamadı.")
+                        _registrationState.value = AuthState.Error(context.getString(R.string.user_data_not_found))
                     }
                 }
                 is Resource.Error -> {
-                    _registrationState.value = AuthState.Error(authResult.message ?: "Kayıt hatası")
+                    _registrationState.value = AuthState.Error(authResult.message ?: context.getString(R.string.registration_error))
                 }
                 is Resource.Loading -> {
                     // Zaten Loading durumundayız
@@ -123,7 +127,7 @@ class AuthViewModel @Inject constructor(
                 _updateProfileState.value = result
             } else {
                 // Resource.Error<Unit> olarak tip belirtiyoruz
-                _updateProfileState.value = Resource.Error("Kullanıcı oturumu bulunamadı.")
+                _updateProfileState.value = Resource.Error(context.getString(R.string.user_session_not_found))
             }
         }
     }

@@ -156,7 +156,7 @@ class CreatePostFragment : Fragment(R.layout.fragment_create_post) {
             var hasError = false
 
             // Başlık kontrolü
-            val titleError = ValidationUtils.getValidationError("title", title)
+            val titleError = ValidationUtils.getValidationError("title", title, requireContext())
             when {
                 title.isEmpty() -> {
                     binding.etTitle.error = getString(R.string.title_required)
@@ -171,7 +171,7 @@ class CreatePostFragment : Fragment(R.layout.fragment_create_post) {
             }
 
             // Açıklama kontrolü
-            val descriptionError = ValidationUtils.getValidationError("description", description)
+            val descriptionError = ValidationUtils.getValidationError("description", description, requireContext())
             when {
                 description.isEmpty() -> {
                     binding.etDescription.error = getString(R.string.description_required)

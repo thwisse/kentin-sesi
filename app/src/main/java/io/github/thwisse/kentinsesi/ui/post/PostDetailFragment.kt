@@ -437,7 +437,7 @@ class PostDetailFragment : Fragment(io.github.thwisse.kentinsesi.R.layout.fragme
         // Buton metni: desteklediyse geri çek, değilse destekle
         val userId = viewModel.currentUserId
         val isUpvotedByMe = userId != null && post.upvotedBy.contains(userId)
-        binding.btnDetailUpvote.text = if (isUpvotedByMe) "Desteği Geri Çek" else "Destekle"
+        binding.btnDetailUpvote.text = if (isUpvotedByMe) getString(R.string.post_detail_withdraw_support) else getString(R.string.post_detail_support)
     }
 
     private fun setupMap(post: Post) {
@@ -483,10 +483,10 @@ class PostDetailFragment : Fragment(io.github.thwisse.kentinsesi.R.layout.fragme
             post?.let {
                 // Post durumunu göster (opsiyonel)
                 val statusText = when (it.statusEnum) {
-                    PostStatus.NEW -> "Yeni"
-                    PostStatus.IN_PROGRESS -> "İşleme Alındı"
-                    PostStatus.RESOLVED -> "Çözüldü"
-                    PostStatus.REJECTED -> "Reddedildi"
+                    PostStatus.NEW -> getString(R.string.status_new)
+                    PostStatus.IN_PROGRESS -> getString(R.string.status_in_progress)
+                    PostStatus.RESOLVED -> getString(R.string.status_resolved)
+                    PostStatus.REJECTED -> getString(R.string.status_rejected)
                 }
             }
         }

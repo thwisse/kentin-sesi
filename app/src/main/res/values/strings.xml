@@ -142,13 +142,13 @@
     <string name="anonymous_user">Anonymous</string>
 
     <!-- Time / Duration -->
-    <string name="time_just_now">Az önce</string>
-    <string name="time_minutes_ago">%d dakika önce</string>
-    <string name="time_hours_ago">%d saat önce</string>
-    <string name="time_days_ago">%d gün önce</string>
-    <string name="time_weeks_ago">%d hafta önce</string>
-    <string name="time_months_ago">%d ay önce</string>
-    <string name="time_years_ago">%d yıl önce</string>
+    <string name="time_just_now">Just now</string>
+    <string name="time_minutes_ago">%d minutes ago</string>
+    <string name="time_hours_ago">%d hours ago</string>
+    <string name="time_days_ago">%d days ago</string>
+    <string name="time_weeks_ago">%d weeks ago</string>
+    <string name="time_months_ago">%d months ago</string>
+    <string name="time_years_ago">%d years ago</string>
 
     <!-- Status Updates -->
     <string name="status_updates">Status Updates</string>
@@ -304,5 +304,94 @@
     
     <!-- Copyright and Trademark Notice -->
     <string name="about_copyright_notice">Kentin Sesi v1.0\n© 2026 zibidiSoft. All Rights Reserved.\n\n\'Kentin Sesi\' name and logos are trademarks of zibidiSoft and cannot be used without permission.</string>
+
+    <!-- Location / Permission -->
+    <string name="location_permission_required">Location permission is required to go to your location.</string>
+    <string name="location_disabled">Your location is disabled. Please enable it.</string>
+    <string name="navigation_error">Navigation error</string>
+
+    <!-- Profile States -->
+    <string name="profile_ready">Your profile is ready!</string>
+    <string name="name_not_specified">Name Not Specified</string>
+    <string name="location_not_specified">Location Not Specified</string>
+    <string name="default_user_title">User</string>
+
+    <!-- Admin -->
+    <string name="access_denied">You don\'t have permission to access this page.</string>
+    <string name="role_updated">Role updated</string>
+
+    <!-- Comments -->
+    <string name="replying_to">Replying to %1$s</string>
+
+    <!-- Validation (inline) -->
+    <string name="validation_name_required">Name cannot be empty</string>
+    <string name="validation_username_required">Username cannot be empty</string>
+    <string name="validation_username_format">Username must be 3–20 characters (a-z, 0-9, _)</string>
+    <string name="validation_district_required">Please select a district</string>
+
+    <!-- Auth Errors -->
+    <string name="auth_error_invalid_email">Invalid email address</string>
+    <string name="auth_error_wrong_password">Incorrect password</string>
+    <string name="auth_error_user_not_found">User not found</string>
+    <string name="auth_error_user_disabled">This account has been disabled</string>
+    <string name="auth_error_email_in_use">This email address is already in use</string>
+    <string name="auth_error_weak_password">Password is too weak. Must be at least 6 characters</string>
+    <string name="auth_error_network">Network connection error</string>
+    <string name="auth_error_too_many_requests">Too many attempts. Please try again later</string>
+    <string name="auth_error_generic">An error occurred</string>
+    <string name="auth_error_login">An error occurred while signing in</string>
+    <string name="auth_error_register">An error occurred while signing up</string>
+
+    <!-- Repository Errors -->
+    <string name="error_profile_create">Profile could not be created.</string>
+    <string name="error_username_invalid">Invalid username</string>
+    <string name="error_username_cannot_change">Username cannot be changed</string>
+    <string name="error_username_taken">This username is already taken</string>
+    <string name="error_profile_update">Profile could not be updated.</string>
+    <string name="error_user_data_read">User data could not be read.</string>
+    <string name="error_user_not_found">User not found.</string>
+    <string name="error_user_info_fetch">User information could not be fetched.</string>
+    <string name="error_user_role_fetch">User role could not be fetched.</string>
+    <string name="error_users_fetch">Users could not be fetched.</string>
+    <string name="error_role_update">Role could not be updated.</string>
+
+    <!-- Post Repository Errors -->
+    <string name="error_operation_failed">Operation failed</string>
+    <string name="error_data_fetch">Failed to fetch data</string>
+    <string name="error_comments_fetch">Failed to fetch comments</string>
+    <string name="error_not_logged_in">Not logged in</string>
+    <string name="error_comment_send">Failed to send comment</string>
+    <string name="error_reply_target_not_found">Reply target comment not found</string>
+    <string name="error_reply_target_read">Failed to read reply target comment</string>
+    <string name="error_reply_send">Failed to send reply</string>
+    <string name="error_post_data_read">Failed to read post data</string>
+    <string name="error_post_not_found">Post not found</string>
+    <string name="error_post_fetch">Failed to fetch post</string>
+    <string name="error_status_updates_fetch">Failed to fetch updates</string>
+
+    <!-- Filter Repository Errors -->
+    <string name="error_filter_not_found">Filter not found</string>
+    <string name="error_filter_default_create">Failed to create default filter</string>
+    <string name="error_filter_name_blank">Filter name cannot be empty</string>
+    <string name="error_filter_default_set">Failed to set default filter</string>
+    <string name="error_filter_name_exists">A filter with this name already exists</string>
+    <string name="error_filter_delete">Filter could not be deleted</string>
+    <string name="error_filter_last_save">Failed to save last filter</string>
+
+    <!-- ViewModel Errors -->
+    <string name="error_post_load">Failed to load post</string>
+    <string name="error_no_permission">You don\'t have permission for this action</string>
+    <string name="error_no_status_update_permission">No permission to update post status</string>
+    <string name="error_admin_required">Admin permission required for this action</string>
+
+    <!-- UI Fallbacks -->
+    <string name="name_unnamed">Unnamed</string>
+    <string name="update_count_format">%d Updates</string>
+    <string name="filter_all_fallback">All</string>
+
+    <!-- User Roles (display) -->
+    <string name="role_citizen">Citizen</string>
+    <string name="role_official">Official</string>
+    <string name="role_admin">Admin</string>
 
 </resources>

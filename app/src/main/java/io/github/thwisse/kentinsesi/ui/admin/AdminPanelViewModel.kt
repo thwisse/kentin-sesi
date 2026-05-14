@@ -1,10 +1,13 @@
 package io.github.thwisse.kentinsesi.ui.admin
 
+import android.content.Context
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import dagger.hilt.android.lifecycle.HiltViewModel
+import dagger.hilt.android.qualifiers.ApplicationContext
+import io.github.thwisse.kentinsesi.R
 import io.github.thwisse.kentinsesi.data.model.User
 import io.github.thwisse.kentinsesi.data.model.UserRole
 import io.github.thwisse.kentinsesi.data.repository.AuthRepository
@@ -17,7 +20,8 @@ import javax.inject.Inject
 @HiltViewModel
 class AdminPanelViewModel @Inject constructor(
     private val userRepository: UserRepository,
-    private val authRepository: AuthRepository
+    private val authRepository: AuthRepository,
+    @ApplicationContext private val context: Context
 ) : ViewModel() {
 
     private val _usersState = MutableLiveData<Resource<List<User>>>()
@@ -73,7 +77,7 @@ class AdminPanelViewModel @Inject constructor(
             val result = userRepository.searchUserByUsername(username)
             _usersState.value = when (result) {
                 is Resource.Success -> Resource.Success(listOfNotNull(result.data))
-                is Resource.Error -> Resource.Error(result.message ?: "Böyle bir kullanıcı yok")
+                is Resource.Error -> Resource.Error(result.message ?: context.getString(R.string.error_user_not_found))
                 is Resource.Loading -> Resource.Loading()
             }
         }
@@ -87,7 +91,7 @@ class AdminPanelViewModel @Inject constructor(
             // Yetki kontrolü
             val user = _currentUser.value
             if (!AuthorizationUtils.isAdmin(user)) {
-                _updateRoleState.value = Resource.Error("Bu işlem için admin yetkisi gereklidir.")
+                _updateRoleState.value = Resource.Error(context.getString(R.string.error_admin_required))
                 return@launch
             }
 

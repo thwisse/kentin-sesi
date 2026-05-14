@@ -37,9 +37,11 @@ class FilterPresetAdapter(
             binding.tvPresetBadge.visibility = if (item.isDefault) View.VISIBLE else View.GONE
 
             val criteria = item.criteria
-            val districts = criteria.districts.joinToString().ifBlank { "Tümü" }
-            val categories = criteria.categories.joinToString().ifBlank { "Tümü" }
-            val statuses = criteria.statuses.joinToString().ifBlank { "Tümü" }
+            val ctx = binding.root.context
+            val allLabel = ctx.getString(R.string.filter_all_fallback)
+            val districts = criteria.districts.joinToString().ifBlank { allLabel }
+            val categories = criteria.categories.joinToString().ifBlank { allLabel }
+            val statuses = criteria.statuses.joinToString().ifBlank { allLabel }
 
             binding.root.setOnClickListener { onClick(item) }
             binding.root.setOnLongClickListener {

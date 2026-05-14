@@ -230,7 +230,7 @@ class CommentsFragment : Fragment(R.layout.fragment_comments) {
         replyingTo = comment
         binding.replyBanner.isVisible = true
         val name = comment.authorFullName.ifBlank { comment.authorUsername }
-        binding.tvReplyBannerText.text = "$name kişisine yanıt"
+        binding.tvReplyBannerText.text = getString(R.string.replying_to, name)
         binding.etComment.requestFocus()
     }
 
@@ -244,10 +244,10 @@ class CommentsFragment : Fragment(R.layout.fragment_comments) {
         com.google.android.material.dialog.MaterialAlertDialogBuilder(requireContext())
             .setTitle(R.string.dialog_delete_comment_title)
             .setMessage(R.string.dialog_delete_comment_message)
-            .setPositiveButton("Sil") { _, _ ->
+            .setPositiveButton(R.string.delete) { _, _ ->
                 viewModel.deleteComment(comment.id)
             }
-            .setNegativeButton("İptal", null)
+            .setNegativeButton(R.string.cancel, null)
             .show()
     }
 
