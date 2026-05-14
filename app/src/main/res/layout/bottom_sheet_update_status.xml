@@ -20,7 +20,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="24dp"
-        android:text="Durum"
+        android:text="@string/update_status_section_label"
         android:textSize="14sp"
         android:textStyle="bold"
         android:textColor="?android:textColorPrimary" />
@@ -63,7 +63,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="24dp"
-        android:text="Not (Zorunlu)"
+        android:text="@string/update_status_note_label"
         android:textSize="14sp"
         android:textStyle="bold"
         android:textColor="?android:textColorPrimary" />
@@ -102,7 +102,7 @@
             android:id="@+id/btnCancel"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="İptal"
+            android:text="@string/cancel"
             style="@style/Widget.Material3.Button.TextButton" />
 
         <com.google.android.material.button.MaterialButton
@@ -110,7 +110,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="8dp"
-            android:text="Kaydet"
+            android:text="@string/save"
             android:enabled="false" />
 
     </LinearLayout>

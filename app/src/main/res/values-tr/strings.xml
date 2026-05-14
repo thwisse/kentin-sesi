@@ -199,14 +199,6 @@
     <string name="filter_delete_title">Filtreyi sil</string>
     <string name="filter_delete_message">\'%1$s\' filtresi silinsin mi?</string>
 
-    <!-- Categories -->
-    <string name="category_infrastructure">Altyapı (Yol/Su)</string>
-    <string name="category_cleaning">Temizlik/Çöp</string>
-    <string name="category_park">Park/Bahçe</string>
-    <string name="category_lighting">Aydınlatma</string>
-    <string name="category_traffic">Trafik</string>
-    <string name="category_other">Diğer</string>
-
     <!-- Validation -->
     <string name="validation_field_required">Bu alan zorunludur</string>
     <string name="validation_email_invalid">Lütfen geçerli bir e-posta adresi girin</string>
@@ -392,5 +384,80 @@
     <string name="role_citizen">Vatandaş</string>
     <string name="role_official">Yetkili</string>
     <string name="role_admin">Admin</string>
+
+    <!-- Navigation Labels -->
+    <string name="nav_create_post">Paylaşım Oluştur</string>
+    <string name="nav_post_detail">Detay</string>
+    <string name="nav_comments">Yorumlar</string>
+    <string name="nav_status_updates">Güncellemeler</string>
+    <string name="nav_filter_label">Filtrele</string>
+    <string name="nav_my_filters">Filtrelerim</string>
+    <string name="nav_location_picker">Konum Seç</string>
+    <string name="nav_admin_panel">Admin Paneli</string>
+
+    <!-- Menu Items -->
+    <string name="menu_new_post">Yeni Paylaşım</string>
+    <string name="menu_delete_post">Bu Paylaşımı Sil</string>
+    <string name="menu_delete_post_short">Sil</string>
+    <string name="menu_update_status">Durumu Güncelle</string>
+
+    <!-- Profile Labels -->
+    <string name="profile_posts_label">Paylaşım</string>
+    <string name="profile_resolved_label">Çözüme Ulaşan</string>
+
+    <!-- Comment Actions -->
+    <string name="reply_action">Yanıtla</string>
+
+    <!-- Update Status Bottom Sheet -->
+    <string name="update_status_section_label">Durum</string>
+    <string name="update_status_note_label">Not (Zorunlu)</string>
+
+    <!-- Post Detail -->
+    <string name="post_detail_supported">Desteklendi</string>
+    <string name="support_count_detail">%1$d Destek</string>
+
+    <!-- Status Badge (unknown) -->
+    <string name="status_unknown_badge">BİLİNMEYEN</string>
+
+    <!-- Categories -->
+    <string name="category_infrastructure">Altyapı</string>
+    <string name="category_infrastructure_road_water">Altyapı (Yol/Su)</string>
+    <string name="category_transportation">Ulaşım</string>
+    <string name="category_environment">Çevre</string>
+    <string name="category_lighting">Aydınlatma</string>
+    <string name="category_park">Park/Bahçe</string>
+    <string name="category_animals">Sokak Hayvanları</string>
+    <string name="category_cleaning">Temizlik/Çöp</string>
+    <string name="category_traffic">Trafik</string>
+    <string name="category_other">Diğer</string>
+
+    <!-- User Titles (auto-assigned) -->
+    <string name="title_new_user">Yeni Kullanıcı</string>
+    <string name="title_sensitive_citizen">Duyarlı Vatandaş</string>
+    <string name="title_active_citizen">Aktif Vatandaş</string>
+    <string name="title_champion_citizen">Şampiyon Vatandaş</string>
+
+    <!-- Map -->
+    <string name="map_problem_location">Sorun Konumu</string>
+
+    <!-- Register Screen -->
+    <string name="register_title">Hesap Oluştur</string>
+
+    <!-- Filter Presets Bottom Sheet -->
+    <string name="filter_presets_tap_to_apply">Filtreyi uygulamak için dokunun.</string>
+    <string name="filter_presets_hold_to_view">Filtre detaylarını görmek için basılı tutun.</string>
+
+    <!-- Filter Options Dialog -->
+    <string name="filter_options_dialog_title">Filtre Seçenekleri</string>
+
+    <!-- Location Picker -->
+    <string name="pick_this_location">Bu Konumu Seç</string>
+
+    <!-- Admin Panel -->
+    <string name="admin_user_management_title">Kullanıcı Yönetimi</string>
+    <string name="admin_refresh">Yenile</string>
+    <string name="admin_search_hint">Kullanıcı adı ile ara</string>
+    <string name="admin_search">Ara</string>
+    <string name="admin_role_label">Rol:</string>
 
 </resources>

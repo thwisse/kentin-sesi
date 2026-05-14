@@ -240,7 +240,15 @@ class CreatePostFragment : Fragment(R.layout.fragment_create_post) {
     }
 
     private fun setupCategorySpinner() {
-        val categories = listOf("Altyapı", "Ulaşım", "Çevre", "Aydınlatma", "Park/Bahçe", "Sokak Hayvanları", "Diğer")
+        val categories = listOf(
+            getString(io.github.thwisse.kentinsesi.R.string.category_infrastructure),
+            getString(io.github.thwisse.kentinsesi.R.string.category_transportation),
+            getString(io.github.thwisse.kentinsesi.R.string.category_environment),
+            getString(io.github.thwisse.kentinsesi.R.string.category_lighting),
+            getString(io.github.thwisse.kentinsesi.R.string.category_park),
+            getString(io.github.thwisse.kentinsesi.R.string.category_animals),
+            getString(io.github.thwisse.kentinsesi.R.string.category_other)
+        )
         val adapter = createNoFilterAdapter(categories)
         binding.actvCategory.setAdapter(adapter)
     }

@@ -4,12 +4,12 @@
 
     <item
         android:id="@+id/action_update_status"
-        android:title="Durumu Güncelle"
+        android:title="@string/menu_update_status"
         app:showAsAction="never" />
     
     <item
         android:id="@+id/action_delete"
-        android:title="Bu Paylaşımı Sil"
-        android:titleCondensed="Sil"
+        android:title="@string/menu_delete_post"
+        android:titleCondensed="@string/menu_delete_post_short"
         app:showAsAction="never" />
 </menu>

@@ -42,10 +42,18 @@ class FilterBottomSheetFragment : BottomSheetDialogFragment() {
         "Reyhanlı", "Samandağ", "Yayladağı"
     )
     
-    private val categories = listOf(
-        "Altyapı (Yol/Su)", "Temizlik/Çöp", "Park/Bahçe", "Aydınlatma", "Trafik", "Diğer"
+    private fun getCategories() = listOf(
+        getString(R.string.category_infrastructure),
+        getString(R.string.category_transportation),
+        getString(R.string.category_environment),
+        getString(R.string.category_lighting),
+        getString(R.string.category_park),
+        getString(R.string.category_cleaning),
+        getString(R.string.category_traffic),
+        getString(R.string.category_animals),
+        getString(R.string.category_other)
     )
-    
+
     private fun getStatusLabels(): Map<String, String> = mapOf(
         "new" to getString(R.string.status_new),
         "in_progress" to getString(R.string.status_in_progress),
@@ -135,7 +143,7 @@ class FilterBottomSheetFragment : BottomSheetDialogFragment() {
         binding.cvCategory.setOnClickListener {
             showFilterOptionsDialog(
                 title = getString(R.string.filter_select_category),
-                items = categories,
+                items = getCategories(),
                 selectedItems = selectedCategories,
                 onSave = { selected ->
                     selectedCategories = selected.toMutableSet()
@@ -297,7 +305,7 @@ class FilterBottomSheetFragment : BottomSheetDialogFragment() {
         // Kategori özeti
         binding.tvCategorySummary.text = getFilterSummary(
             selectedItems = selectedCategories,
-            totalItems = categories.size
+            totalItems = getCategories().size
         )
 
         // Durum özeti - Önce key'leri display name'e çevir

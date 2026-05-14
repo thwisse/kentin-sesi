@@ -15,7 +15,7 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:text="Filtrelerim"
+            android:text="@string/nav_my_filters"
             android:textColor="@color/black"
             android:textSize="20sp"
             android:textStyle="bold" />
@@ -24,7 +24,7 @@
             android:id="@+id/btnClose"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Kapat" />
+            android:text="@string/close" />
     </LinearLayout>
 
     <TextView
@@ -32,7 +32,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="8dp"
-        android:text="Filtreyi uygulamak için dokunun."
+        android:text="@string/filter_presets_tap_to_apply"
         android:textColor="#666"
         android:textSize="13sp" />
 
@@ -41,7 +41,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="8dp"
-        android:text="Filtre detaylarını görmek için basılı tutun."
+        android:text="@string/filter_presets_hold_to_view"
         android:textColor="#666"
         android:textSize="13sp" />
 

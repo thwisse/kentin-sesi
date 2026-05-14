@@ -20,6 +20,8 @@ import io.github.thwisse.kentinsesi.util.Resource
 import io.github.thwisse.kentinsesi.util.ValidationUtils
 import io.github.thwisse.kentinsesi.util.applyAppTheme
 import io.github.thwisse.kentinsesi.util.loadAvatar
+import io.github.thwisse.kentinsesi.util.toLocalizedCategory
+import io.github.thwisse.kentinsesi.util.toLocalizedTitle
 import androidx.core.view.isVisible
 import androidx.core.view.MenuHost
 import androidx.core.view.MenuProvider
@@ -114,7 +116,7 @@ class PostDetailFragment : Fragment(io.github.thwisse.kentinsesi.R.layout.fragme
                 val location = listOf(author.city, author.district)
                     .filter { it.isNotBlank() }
                     .joinToString("/")
-                val title = author.title
+                val title = author.title.toLocalizedTitle(requireContext())
                 binding.tvPostAuthorMeta.text = buildString {
                     if (location.isNotBlank()) append(location)
                     if (location.isNotBlank() && title.isNotBlank()) append(" • ")
@@ -368,7 +370,7 @@ class PostDetailFragment : Fragment(io.github.thwisse.kentinsesi.R.layout.fragme
         binding.apply {
             tvDetailTitle.text = post.title
             tvDetailDescription.text = post.description
-            tvDetailCategory.text = post.category
+            tvDetailCategory.text = post.category.toLocalizedCategory(requireContext())
             tvDetailDistrict.text = "Hatay, ${post.district ?: "-"}"
 
             tvDetailDate.text = post.createdAt?.toDate()?.let { date ->
@@ -389,10 +391,10 @@ class PostDetailFragment : Fragment(io.github.thwisse.kentinsesi.R.layout.fragme
                 PostStatus.NEW -> getString(R.string.post_status_new)
                 PostStatus.IN_PROGRESS -> getString(R.string.post_status_in_progress)
                 PostStatus.RESOLVED -> getString(R.string.post_status_resolved)
-                PostStatus.REJECTED -> "Reddedildi"
+                PostStatus.REJECTED -> getString(R.string.post_status_rejected)
             }
 
-            tvDetailUpvoteCount.text = "${post.upvoteCount} Destek"
+            tvDetailUpvoteCount.text = getString(R.string.support_count_detail, post.upvoteCount)
             ivDetailImage.load(post.imageUrl) { crossfade(true) }
             
             // Yorum sayısını güncelle (CommentsFragment'tan döndükten sonra)
@@ -434,10 +436,10 @@ class PostDetailFragment : Fragment(io.github.thwisse.kentinsesi.R.layout.fragme
             viewModel.toggleUpvote(postId)
         }
 
-        // Buton metni: desteklediyse geri çek, değilse destekle
+        // Buton metni: desteklediyse "Desteklendi", değilse "Destekle"
         val userId = viewModel.currentUserId
         val isUpvotedByMe = userId != null && post.upvotedBy.contains(userId)
-        binding.btnDetailUpvote.text = if (isUpvotedByMe) getString(R.string.post_detail_withdraw_support) else getString(R.string.post_detail_support)
+        binding.btnDetailUpvote.text = if (isUpvotedByMe) getString(R.string.post_detail_supported) else getString(R.string.post_detail_support)
     }
 
     private fun setupMap(post: Post) {
@@ -496,7 +498,7 @@ class PostDetailFragment : Fragment(io.github.thwisse.kentinsesi.R.layout.fragme
         googleMap.applyAppTheme(requireContext())
         googleMap.setInfoWindowAdapter(io.github.thwisse.kentinsesi.ui.map.CustomInfoWindowAdapter(requireContext()))
         postLocation?.let { location ->
-            googleMap.addMarker(MarkerOptions().position(location).title("Sorun Konumu"))
+            googleMap.addMarker(MarkerOptions().position(location).title(getString(R.string.map_problem_location)))
             googleMap.moveCamera(CameraUpdateFactory.newLatLngZoom(location, 15f))
         }
     }

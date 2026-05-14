@@ -19,7 +19,7 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:text="Kullanıcı Yönetimi"
+            android:text="@string/admin_user_management_title"
             android:textColor="@color/white"
             android:textSize="20sp"
             android:textStyle="bold" />
@@ -28,7 +28,7 @@
             android:id="@+id/btnRefresh"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Yenile"
+            android:text="@string/admin_refresh"
             android:textColor="@color/white" />
     </LinearLayout>
 
@@ -47,7 +47,7 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:hint="Kullanıcı adı ile ara">
+            android:hint="@string/admin_search_hint">
 
             <com.google.android.material.textfield.TextInputEditText
                 android:id="@+id/etSearchUsername"
@@ -62,7 +62,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="12dp"
-            android:text="Ara" />
+            android:text="@string/admin_search" />
 
     </LinearLayout>
 

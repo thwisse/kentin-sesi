@@ -60,12 +60,12 @@
     <fragment
         android:id="@+id/nav_notifications"
         android:name="io.github.thwisse.kentinsesi.ui.notifications.NotificationsFragment"
-        android:label="Bildirimler"
+        android:label="@string/nav_notifications"
         tools:layout="@layout/fragment_notifications" />
     <fragment
         android:id="@+id/nav_profile"
         android:name="io.github.thwisse.kentinsesi.ui.profile.ProfileFragment"
-        android:label="Profil"
+        android:label="@string/nav_profile"
         tools:layout="@layout/fragment_profile" >
         <action
             android:id="@+id/action_nav_profile_to_postDetailFragment"
@@ -92,7 +92,7 @@
     <fragment
         android:id="@+id/createPostFragment"
         android:name="io.github.thwisse.kentinsesi.ui.post.CreatePostFragment"
-        android:label="Paylaşım Oluştur"
+        android:label="@string/nav_create_post"
         tools:layout="@layout/fragment_create_post" >
         <action
             android:id="@+id/action_createPostFragment_to_locationPickerFragment"
@@ -105,7 +105,7 @@
     <fragment
         android:id="@+id/postDetailFragment"
         android:name="io.github.thwisse.kentinsesi.ui.post.PostDetailFragment"
-        android:label="Detay"
+        android:label="@string/nav_post_detail"
         tools:layout="@layout/fragment_post_detail">
 
         <argument
@@ -130,7 +130,7 @@
     <fragment
         android:id="@+id/commentsFragment"
         android:name="io.github.thwisse.kentinsesi.ui.post.CommentsFragment"
-        android:label="Yorumlar"
+        android:label="@string/nav_comments"
         tools:layout="@layout/fragment_comments">
         <argument
             android:name="postId"
@@ -140,7 +140,7 @@
     <fragment
         android:id="@+id/statusUpdatesFragment"
         android:name="io.github.thwisse.kentinsesi.ui.post.StatusUpdatesFragment"
-        android:label="Güncellemeler"
+        android:label="@string/nav_status_updates"
         tools:layout="@layout/fragment_status_updates">
         <argument
             android:name="postId"
@@ -149,22 +149,22 @@
     <dialog
         android:id="@+id/filterBottomSheetFragment"
         android:name="io.github.thwisse.kentinsesi.ui.home.FilterBottomSheetFragment"
-        android:label="Filtrele"
+        android:label="@string/nav_filter_label"
         tools:layout="@layout/fragment_filter_bottom_sheet" />
     <dialog
         android:id="@+id/filterPresetsBottomSheetFragment"
         android:name="io.github.thwisse.kentinsesi.ui.home.FilterPresetsBottomSheetFragment"
-        android:label="Filtrelerim"
+        android:label="@string/nav_my_filters"
         tools:layout="@layout/fragment_filter_presets_bottom_sheet" />
     <fragment
         android:id="@+id/locationPickerFragment"
         android:name="io.github.thwisse.kentinsesi.ui.map.LocationPickerFragment"
-        android:label="Konum Seç"
+        android:label="@string/nav_location_picker"
         tools:layout="@layout/fragment_location_picker" />
     <fragment
         android:id="@+id/adminPanelFragment"
         android:name="io.github.thwisse.kentinsesi.ui.admin.AdminPanelFragment"
-        android:label="Admin Paneli"
+        android:label="@string/nav_admin_panel"
         tools:layout="@layout/fragment_admin_panel" />
     <fragment
         android:id="@+id/aboutFragment"

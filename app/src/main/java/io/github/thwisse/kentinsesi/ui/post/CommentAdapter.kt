@@ -13,6 +13,7 @@ import io.github.thwisse.kentinsesi.data.model.Comment
 import io.github.thwisse.kentinsesi.databinding.ItemCommentBinding
 import io.github.thwisse.kentinsesi.util.Constants
 import io.github.thwisse.kentinsesi.util.loadAvatar
+import io.github.thwisse.kentinsesi.util.toLocalizedTitle
 import java.text.SimpleDateFormat
 import java.util.Locale
 
@@ -103,7 +104,7 @@ class CommentAdapter(
             val location = listOf(comment.authorCity, comment.authorDistrict)
                 .filter { it.isNotBlank() }
                 .joinToString("/")
-            val title = comment.authorTitle
+            val title = comment.authorTitle.toLocalizedTitle(context)
             binding.tvAuthorMeta.text = buildString {
                 if (location.isNotBlank()) append(location)
                 if (location.isNotBlank() && title.isNotBlank()) append(" • ")

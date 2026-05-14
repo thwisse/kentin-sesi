@@ -201,14 +201,6 @@
     <string name="filter_delete_title">Delete filter</string>
     <string name="filter_delete_message">Delete \'%1$s\' filter?</string>
 
-    <!-- Categories -->
-    <string name="category_infrastructure">Infrastructure (Road/Water)</string>
-    <string name="category_cleaning">Cleaning/Garbage</string>
-    <string name="category_park">Park/Garden</string>
-    <string name="category_lighting">Lighting</string>
-    <string name="category_traffic">Traffic</string>
-    <string name="category_other">Other</string>
-
     <!-- Validation -->
     <string name="validation_field_required">This field is required</string>
     <string name="validation_email_invalid">Please enter a valid email address</string>
@@ -393,5 +385,80 @@
     <string name="role_citizen">Citizen</string>
     <string name="role_official">Official</string>
     <string name="role_admin">Admin</string>
+
+    <!-- Navigation Labels -->
+    <string name="nav_create_post">Create Post</string>
+    <string name="nav_post_detail">Details</string>
+    <string name="nav_comments">Comments</string>
+    <string name="nav_status_updates">Updates</string>
+    <string name="nav_filter_label">Filter</string>
+    <string name="nav_my_filters">My Filters</string>
+    <string name="nav_location_picker">Pick Location</string>
+    <string name="nav_admin_panel">Admin Panel</string>
+
+    <!-- Menu Items -->
+    <string name="menu_new_post">New Post</string>
+    <string name="menu_delete_post">Delete This Post</string>
+    <string name="menu_delete_post_short">Delete</string>
+    <string name="menu_update_status">Update Status</string>
+
+    <!-- Profile Labels -->
+    <string name="profile_posts_label">Posts</string>
+    <string name="profile_resolved_label">Resolved</string>
+
+    <!-- Comment Actions -->
+    <string name="reply_action">Reply</string>
+
+    <!-- Update Status Bottom Sheet -->
+    <string name="update_status_section_label">Status</string>
+    <string name="update_status_note_label">Note (Required)</string>
+
+    <!-- Post Detail -->
+    <string name="post_detail_supported">Supported</string>
+    <string name="support_count_detail">%1$d Supports</string>
+
+    <!-- Status Badge (unknown) -->
+    <string name="status_unknown_badge">UNKNOWN</string>
+
+    <!-- Categories -->
+    <string name="category_infrastructure">Infrastructure</string>
+    <string name="category_infrastructure_road_water">Infrastructure (Road/Water)</string>
+    <string name="category_transportation">Transportation</string>
+    <string name="category_environment">Environment</string>
+    <string name="category_lighting">Lighting</string>
+    <string name="category_park">Park/Garden</string>
+    <string name="category_animals">Street Animals</string>
+    <string name="category_cleaning">Cleaning/Waste</string>
+    <string name="category_traffic">Traffic</string>
+    <string name="category_other">Other</string>
+
+    <!-- User Titles (auto-assigned) -->
+    <string name="title_new_user">New User</string>
+    <string name="title_sensitive_citizen">Concerned Citizen</string>
+    <string name="title_active_citizen">Active Citizen</string>
+    <string name="title_champion_citizen">Champion Citizen</string>
+
+    <!-- Map -->
+    <string name="map_problem_location">Problem Location</string>
+
+    <!-- Register Screen -->
+    <string name="register_title">Create Account</string>
+
+    <!-- Filter Presets Bottom Sheet -->
+    <string name="filter_presets_tap_to_apply">Tap to apply the filter.</string>
+    <string name="filter_presets_hold_to_view">Hold to view filter details.</string>
+
+    <!-- Filter Options Dialog -->
+    <string name="filter_options_dialog_title">Filter Options</string>
+
+    <!-- Location Picker -->
+    <string name="pick_this_location">Pick This Location</string>
+
+    <!-- Admin Panel -->
+    <string name="admin_user_management_title">User Management</string>
+    <string name="admin_refresh">Refresh</string>
+    <string name="admin_search_hint">Search by username</string>
+    <string name="admin_search">Search</string>
+    <string name="admin_role_label">Role:</string>
 
 </resources>

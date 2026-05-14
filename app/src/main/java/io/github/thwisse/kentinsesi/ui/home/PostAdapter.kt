@@ -8,6 +8,7 @@ import androidx.recyclerview.widget.RecyclerView
 import coil.load
 import io.github.thwisse.kentinsesi.data.model.Post
 import io.github.thwisse.kentinsesi.databinding.ItemPostBinding
+import io.github.thwisse.kentinsesi.util.toLocalizedCategory
 
 class PostAdapter(
     private val onItemClick: (Post) -> Unit
@@ -27,7 +28,7 @@ class PostAdapter(
             val context = binding.root.context
             binding.apply {
                 tvTitle.text = post.title
-                tvCategory.text = post.category
+                tvCategory.text = post.category.toLocalizedCategory(context)
                 tvUpvoteCount.text = context.getString(io.github.thwisse.kentinsesi.R.string.post_support_count, post.upvoteCount)
                 tvCommentCount.text = context.getString(io.github.thwisse.kentinsesi.R.string.post_comment_count, post.commentCount)
                 tvUpdateCount.text = context.getString(io.github.thwisse.kentinsesi.R.string.update_count_format, post.updateCount)

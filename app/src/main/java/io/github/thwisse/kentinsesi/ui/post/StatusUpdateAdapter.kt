@@ -9,6 +9,7 @@ import androidx.recyclerview.widget.RecyclerView
 import io.github.thwisse.kentinsesi.data.model.StatusUpdate
 import io.github.thwisse.kentinsesi.databinding.ItemStatusUpdateBinding
 import io.github.thwisse.kentinsesi.util.loadAvatar
+import io.github.thwisse.kentinsesi.util.toLocalizedTitle
 import java.text.SimpleDateFormat
 import java.util.Locale
 
@@ -28,23 +29,24 @@ class StatusUpdateAdapter : ListAdapter<StatusUpdate, StatusUpdateAdapter.ViewHo
     }
 
     class ViewHolder(private val binding: ItemStatusUpdateBinding) : RecyclerView.ViewHolder(binding.root) {
-        
+
         private val dateFormat = SimpleDateFormat("EEEE, dd MMM, HH:mm", Locale.getDefault())
 
         fun bind(update: StatusUpdate, position: Int) {
+            val context = binding.root.context
             // Avatar loading
             android.util.Log.d("StatusUpdateAdapter", "bind() - update.id=${update.id}, authorAvatarSeed='${update.authorAvatarSeed}'")
             binding.ivUpdateAuthorAvatar.loadAvatar(update.authorAvatarSeed)
-            
+
             // Ok işareti - sadece ilk item'dan sonrakiler için göster
             binding.tvTimelineArrow.visibility = if (position == 0) android.view.View.GONE else android.view.View.VISIBLE
-            
+
             // Durum badge'i
             val (badgeText, badgeColor) = when (update.status) {
-                "new" -> "YENİ" to Color.parseColor("#2196F3") // Mavi
-                "in_progress" -> "İŞLEMDE" to Color.parseColor("#FF9800") // Turuncu
-                "resolved" -> "ÇÖZÜLDÜ" to Color.parseColor("#4CAF50") // Yeşil
-                else -> "BİLİNMEYEN" to Color.parseColor("#9E9E9E") // Gri
+                "new" -> context.getString(io.github.thwisse.kentinsesi.R.string.status_new_badge) to Color.parseColor("#2196F3")
+                "in_progress" -> context.getString(io.github.thwisse.kentinsesi.R.string.status_in_progress_badge) to Color.parseColor("#FF9800")
+                "resolved" -> context.getString(io.github.thwisse.kentinsesi.R.string.status_resolved_badge) to Color.parseColor("#4CAF50")
+                else -> context.getString(io.github.thwisse.kentinsesi.R.string.status_unknown_badge) to Color.parseColor("#9E9E9E")
             }
             
             binding.tvStatusBadge.text = badgeText
@@ -69,7 +71,7 @@ class StatusUpdateAdapter : ListAdapter<StatusUpdate, StatusUpdateAdapter.ViewHo
             val location = listOf(update.authorCity, update.authorDistrict)
                 .filter { it.isNotBlank() }
                 .joinToString("/")
-            val title = update.authorTitle
+            val title = update.authorTitle.toLocalizedTitle(context)
             
             val metaInfo = buildString {
                 if (location.isNotBlank()) append(location)
