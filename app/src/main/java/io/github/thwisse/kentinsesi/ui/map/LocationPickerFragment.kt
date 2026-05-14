@@ -20,6 +20,7 @@ import com.google.android.gms.maps.SupportMapFragment
 import com.google.android.gms.maps.model.LatLng
 import io.github.thwisse.kentinsesi.R
 import io.github.thwisse.kentinsesi.databinding.FragmentLocationPickerBinding
+import io.github.thwisse.kentinsesi.util.applyAppTheme
 
 class LocationPickerFragment : Fragment(R.layout.fragment_location_picker), OnMapReadyCallback {
 
@@ -51,6 +52,7 @@ class LocationPickerFragment : Fragment(R.layout.fragment_location_picker), OnMa
 
     override fun onMapReady(map: GoogleMap) {
         googleMap = map
+        map.applyAppTheme(requireContext())
 
         // Varsayılan başlangıç (İskenderun)
         val startLocation = LatLng(36.58, 36.17)

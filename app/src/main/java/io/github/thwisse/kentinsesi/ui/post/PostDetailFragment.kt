@@ -18,6 +18,7 @@ import io.github.thwisse.kentinsesi.databinding.FragmentPostDetailBinding
 import io.github.thwisse.kentinsesi.data.model.Comment
 import io.github.thwisse.kentinsesi.util.Resource
 import io.github.thwisse.kentinsesi.util.ValidationUtils
+import io.github.thwisse.kentinsesi.util.applyAppTheme
 import io.github.thwisse.kentinsesi.util.loadAvatar
 import androidx.core.view.isVisible
 import androidx.core.view.MenuHost
@@ -492,6 +493,7 @@ class PostDetailFragment : Fragment(io.github.thwisse.kentinsesi.R.layout.fragme
     }
 
     override fun onMapReady(googleMap: GoogleMap) {
+        googleMap.applyAppTheme(requireContext())
         googleMap.setInfoWindowAdapter(io.github.thwisse.kentinsesi.ui.map.CustomInfoWindowAdapter(requireContext()))
         postLocation?.let { location ->
             googleMap.addMarker(MarkerOptions().position(location).title("Sorun Konumu"))

@@ -30,6 +30,7 @@ import io.github.thwisse.kentinsesi.data.model.Post
 import io.github.thwisse.kentinsesi.databinding.FragmentMapBinding
 import io.github.thwisse.kentinsesi.ui.home.HomeViewModel
 import io.github.thwisse.kentinsesi.util.Resource
+import io.github.thwisse.kentinsesi.util.applyAppTheme
 
 @AndroidEntryPoint
 class MapFragment : Fragment(R.layout.fragment_map), OnMapReadyCallback, GoogleMap.OnInfoWindowClickListener {
@@ -138,6 +139,7 @@ class MapFragment : Fragment(R.layout.fragment_map), OnMapReadyCallback, GoogleM
 
     override fun onMapReady(map: GoogleMap) {
         googleMap = map
+        map.applyAppTheme(requireContext())
         googleMap?.setInfoWindowAdapter(CustomInfoWindowAdapter(requireContext()))
 
         // Baloncuk tıklamasını dinle
